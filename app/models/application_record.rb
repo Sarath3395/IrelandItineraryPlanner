@@ -1,5 +1,5 @@
 class ApplicationRecord < ActiveRecord::Base
   self.abstract_class = true
 
-  #niranjan git
+  #test git
 end
