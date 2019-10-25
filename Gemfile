@@ -24,7 +24,11 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
-
+# Heroku uses Heroku Postgres DB based on PostgreSQL
+group :production do
+gem 'pg'
+gem 'rails_12factor'
+end
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
