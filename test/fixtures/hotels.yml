@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  roomtype: MyString
+  fromdate: 2019-10-28 17:11:34
+  coordinates: MyString
+  address: MyString
+  todate: 2019-10-28 17:11:34
+  price: MyString
+  noofrooms: MyString
+  noofperson: MyString
+  bedtype: MyString
+  location: one
+
+two:
+  name: MyString
+  roomtype: MyString
+  fromdate: 2019-10-28 17:11:34
+  coordinates: MyString
+  address: MyString
+  todate: 2019-10-28 17:11:34
+  price: MyString
+  noofrooms: MyString
+  noofperson: MyString
+  bedtype: MyString
+  location: two

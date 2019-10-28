@@ -1,0 +1,72 @@
+<%= form_with(model: hotel, local: true) do |form| %>
+  <% if hotel.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(hotel.errors.count, "error") %> prohibited this hotel from being saved:</h2>
+
+      <ul>
+        <% hotel.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :roomtype %>
+    <%= form.text_field :roomtype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :fromdate %>
+    <%= form.datetime_select :fromdate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :coordinates %>
+    <%= form.text_field :coordinates %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address %>
+    <%= form.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :todate %>
+    <%= form.datetime_select :todate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :noofrooms %>
+    <%= form.text_field :noofrooms %>
+  </div>
+
+  <div class="field">
+    <%= form.label :noofperson %>
+    <%= form.text_field :noofperson %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bedtype %>
+    <%= form.text_field :bedtype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_id %>
+    <%= form.text_field :location_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

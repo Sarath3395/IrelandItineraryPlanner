@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @liked_hotel.user_id %>
+</p>
+
+<p>
+  <strong>Hotel:</strong>
+  <%= @liked_hotel.hotel_id %>
+</p>
+
+<%= link_to 'Edit', edit_liked_hotel_path(@liked_hotel) %> |
+<%= link_to 'Back', liked_hotels_path %>
