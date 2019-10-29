@@ -1,3 +1,60 @@
-<h2>
-	Welcome to HomePage!!!
-</h2>
+  <% if user_signed_in? %>
+    <table><h2>Recommended Hotels for you!!!</h2>
+      <tr>
+        <th>Hotels</th>
+      </tr>
+      <% i=0 %>
+      <% @user.recommend_hotels.each do |key, value| %>
+        <% if (i < 5) %>
+          <% i=i+1 %>
+          <tr>
+            <td><%= link_to key.name , key %></td>
+            <td><%=  key.address %></td>
+            <td><%=  key.location.name %></td>
+            <td><%=  key.price %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <table><h2>Recommended Restaurants for you!!!</h2>
+      <tr>
+        <th>Restaurants</th>
+      </tr>
+      <% i=0 %>
+      <% @user.recommend_restaurants.each do |key, value| %>
+        <% if (i < 5) %>
+          <% i=i+1 %>
+          <tr>
+            <td><%= link_to key.name , key %></td>
+            <td><%=  key.foodtype %></td>
+            <td><%=  key.location.name %></td>
+            <td><%=  key.price %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    </table>
+    <table><h2>Recommended Transports for you!!!</h2>
+      <tr>
+        <th>Transports</th>
+      </tr>
+      <% i=0 %>
+      <% @user.recommend_transports.each do |key, value| %>
+        <% if (i < 5) %>
+          <% i=i+1 %>
+          <tr>
+            <td><%= link_to key.name , key %></td>
+            <td><%=  key.transporttype %></td>
+            <td><%=  key.location.name %></td>
+            <td><%=  key.price %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% else %>
+    <ul><h2>Hotels List</h2>
+      <% @hotels.each do |hotel| %>
+        <li><%= link_to hotel.name, hotel %></li>
+      <% end %>
+    </ul>
+  <% end %>

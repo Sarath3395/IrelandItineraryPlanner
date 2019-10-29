@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @transport.name %>
+</p>
+
+<p>
+  <strong>Transport Type:</strong>
+  <%= @transport.transporttype %>
+</p>
+
+<p>
+  <strong>Origin:</strong>
+  <%= @transport.origin %>
+</p>
+
+<p>
+  <strong>Destination:</strong>
+  <%= @transport.destination %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @transport.departure %>
+</p>
+
+<p>
+  <strong>Arrival:</strong>
+  <%= @transport.arrival %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @transport.price %>
+</p>
+
+<p>
+  <strong>Location:</strong>
+  <%= @transport.location_id %>
+</p>
+
+<%= link_to 'Edit', edit_transport_path(@transport) %> |
+<%= link_to 'Back', transports_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Liked Transports</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Transport</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @liked_transports.each do |liked_transport| %>
+      <tr>
+        <td><%= liked_transport.user_id %></td>
+        <td><%= liked_transport.transport_id %></td>
+        <td><%= link_to 'Show', liked_transport %></td>
+        <td><%= link_to 'Edit', edit_liked_transport_path(liked_transport) %></td>
+        <td><%= link_to 'Destroy', liked_transport, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Liked Transport', new_liked_transport_path %>

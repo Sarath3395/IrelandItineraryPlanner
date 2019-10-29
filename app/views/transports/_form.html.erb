@@ -1,0 +1,57 @@
+<%= form_with(model: transport, local: true) do |form| %>
+  <% if transport.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transport.errors.count, "error") %> prohibited this transport from being saved:</h2>
+
+      <ul>
+        <% transport.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :transporttype %>
+    <%= form.text_field :transporttype %>
+  </div>
+
+  <div class="field">
+    <%= form.label :origin %>
+    <%= form.text_field :origin %>
+  </div>
+
+  <div class="field">
+    <%= form.label :destination %>
+    <%= form.text_field :destination %>
+  </div>
+
+  <div class="field">
+    <%= form.label :departure %>
+    <%= form.datetime_select :departure %>
+  </div>
+
+  <div class="field">
+    <%= form.label :arrival %>
+    <%= form.datetime_select :arrival %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price %>
+    <%= form.text_field :price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :location_id %>
+    <%= form.text_field :location_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

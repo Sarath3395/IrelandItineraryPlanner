@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  origin: MyString
+  destination: MyString
+  departure: 2019-10-29 16:14:13
+  arrival: 2019-10-29 16:14:13
+  price: MyString
+  location: one
+
+two:
+  name: MyString
+  type: 
+  origin: MyString
+  destination: MyString
+  departure: 2019-10-29 16:14:13
+  arrival: 2019-10-29 16:14:13
+  price: MyString
+  location: two

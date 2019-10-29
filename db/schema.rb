@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_28_171416) do
+ActiveRecord::Schema.define(version: 2019_10_29_164205) do
 
   create_table "hotels", force: :cascade do |t|
     t.string "name"
@@ -38,11 +38,62 @@ ActiveRecord::Schema.define(version: 2019_10_28_171416) do
     t.index ["user_id"], name: "index_liked_hotels_on_user_id"
   end
 
+  create_table "liked_locations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_liked_locations_on_location_id"
+    t.index ["user_id"], name: "index_liked_locations_on_user_id"
+  end
+
+  create_table "liked_restaurants", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "restaurant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["restaurant_id"], name: "index_liked_restaurants_on_restaurant_id"
+    t.index ["user_id"], name: "index_liked_restaurants_on_user_id"
+  end
+
+  create_table "liked_transports", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "transport_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["transport_id"], name: "index_liked_transports_on_transport_id"
+    t.index ["user_id"], name: "index_liked_transports_on_user_id"
+  end
+
   create_table "locations", force: :cascade do |t|
     t.string "name"
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.string "foodtype"
+    t.string "price"
+    t.integer "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_restaurants_on_location_id"
+  end
+
+  create_table "transports", force: :cascade do |t|
+    t.string "name"
+    t.string "transporttype"
+    t.string "origin"
+    t.string "destination"
+    t.datetime "departure"
+    t.datetime "arrival"
+    t.string "price"
+    t.integer "location_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["location_id"], name: "index_transports_on_location_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +111,12 @@ ActiveRecord::Schema.define(version: 2019_10_28_171416) do
   add_foreign_key "hotels", "locations"
   add_foreign_key "liked_hotels", "hotels"
   add_foreign_key "liked_hotels", "users"
+  add_foreign_key "liked_locations", "locations"
+  add_foreign_key "liked_locations", "users"
+  add_foreign_key "liked_restaurants", "restaurants"
+  add_foreign_key "liked_restaurants", "users"
+  add_foreign_key "liked_transports", "transports"
+  add_foreign_key "liked_transports", "users"
+  add_foreign_key "restaurants", "locations"
+  add_foreign_key "transports", "locations"
 end

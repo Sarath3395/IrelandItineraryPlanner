@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :liked_locations
+  resources :liked_transports
+  resources :liked_restaurants
+  resources :transports
+  resources :restaurants
   resources :liked_hotels
   resources :hotels
   resources :locations
