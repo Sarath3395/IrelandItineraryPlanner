@@ -17,14 +17,43 @@
   <p class="alert alert-danger"><%= alert %></p>
 <% end %>
 
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/">Itineray Planner</a>
+  <form class="form-inline">
+    <% if user_signed_in? %>
+    Logged in as &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
+
+    <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
+    Edit profile
+    </a>
+
+    <div style="padding-left: 10px;">
+      <a class="btn btn-outline-danger" data-method="delete" href="<%=destroy_user_session_path%>" role="button">
+      Logout
+      </a>
+    </div>
+
+
+    <% else %>
+
+    <a class="btn btn-outline-primary" href="<%=new_user_session_path%>" role="button">
+    Login
+    </a>
+
+    <div style="padding-left: 10px;">
+      <a class="btn btn-outline-success" href="<%=new_user_registration_path%>" role="button">
+      Sign Up
+      </a>
+    </div>
+
+    <% end %>
+  </form>
+</nav>
+
+
+    <div style="padding-left: 15px;">
     <%= yield %>
+    </div>
   </body>
 </html>
