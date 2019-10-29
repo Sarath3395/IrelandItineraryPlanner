@@ -8,10 +8,10 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
   </head>
 
@@ -56,8 +56,36 @@
     <% end %>
   </form>
 </nav>
+<div style="padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">
+<%= form_for :anything, url: "" , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 
+  <span class="field">
+    <%= form.text_field :fromdate ,placeholder: "From Date"%>
+  </span>
+    <span class="field">
+    <%= form.text_field :todate ,placeholder: "To Date"%>
+  </span>
+      <span class="field">
+    <%= form.text_field :noofpersons ,placeholder: "No of persons"%>
+  </span>
 
+      <span class="field">
+    <%= form.text_field :noofrooms ,placeholder: "No of rooms"%>
+  </span>
+
+        <span class="field">
+    <%= form.text_field :searchtype ,placeholder: "Search type"%>
+  </span>
+
+        <span class="field">
+    <%= form.text_field :priceplace ,placeholder: "Price/Place"%>
+  </span>
+
+  <span>
+  <%= form.submit "Search" ,{class: "btn btn-primary"} %>
+  </span>
+<% end  %>
+</div>
     <div style="padding-left: 15px;">
     <%= yield %>
     </div>
