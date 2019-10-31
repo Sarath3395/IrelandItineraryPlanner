@@ -42,8 +42,9 @@
 
 
     <% else %>
+      <a  href="/auth/google_oauth2" >Google SignIn</a>
 
-    <a class="btn btn-outline-primary" href="<%=new_user_session_path%>" role="button">
+      <a class="btn btn-outline-primary" href="<%=new_user_session_path%>" role="button">
     Login
     </a>
 
@@ -57,28 +58,28 @@
   </form>
 </nav>
 <div style="padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">
-<%= form_for :anything, url: "" , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+<%= form_for :search, url: "/search" , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 
   <span class="field">
-    <%= form.text_field :fromdate ,placeholder: "From Date"%>
+    <%= text_field_tag :fromdate %>
   </span>
     <span class="field">
-    <%= form.text_field :todate ,placeholder: "To Date"%>
+    <%= text_field_tag :todate %>
   </span>
       <span class="field">
-    <%= form.text_field :noofpersons ,placeholder: "No of persons"%>
+    <%= text_field_tag :noofpersons %>
   </span>
 
       <span class="field">
-    <%= form.text_field :noofrooms ,placeholder: "No of rooms"%>
+    <%= text_field_tag :noofrooms %>
   </span>
 
         <span class="field">
-    <%= form.text_field :searchtype ,placeholder: "Search type"%>
+    <%= text_field_tag :searchtype%>
   </span>
 
         <span class="field">
-    <%= form.text_field :priceplace ,placeholder: "Price/Place"%>
+    <%= text_field_tag :priceplace %>
   </span>
 
   <span>

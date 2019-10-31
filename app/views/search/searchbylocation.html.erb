@@ -1,0 +1,60 @@
+  <% if @hotels.empty? %>
+    <h2> No hotels found under selected criteria!!! Please Search again.</h2>
+    <% else %>
+    <table><h2>Search Result Based on Location</h2>
+      <tr>
+        <th>Hotel</th>
+      </tr>
+      <% i=0 %>
+      <% @hotels.each do |hotel| %>
+        <% if (i < 5) %>
+          <% i=i+1 %>
+          <tr>
+            <td><%= link_to hotel.name , hotel %></td>
+            <td><%=  hotel.price %></td>
+            <td><%=  hotel.location.name %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+  <% end %>
+  <% if @restaurants.empty? %>
+    <h2> No Restaurant found under selected criteria!!! Please Search again.</h2>
+  <% else %>
+  <table>
+    <tr>
+      <th>Restaurants</th>
+    </tr>
+    <% i=0 %>
+    <% @restaurants.each do |restaurant| %>
+      <% if (i < 5) %>
+        <% i=i+1 %>
+        <tr>
+          <td><%= link_to restaurant.name , restaurant %></td>
+          <td><%=  restaurant.price %></td>
+          <td><%=  restaurant.location.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+    <% end %>
+  <% if @transports.empty? %>
+    <h2> No Transport found under selected criteria!!! Please Search again.</h2>
+  <% else %>
+  <table>
+    <tr>
+      <th>Transports</th>
+    </tr>
+    <% i=0 %>
+    <% @transports.each do |transport| %>
+      <% if (i < 5) %>
+        <% i=i+1 %>
+        <tr>
+          <td><%= link_to transport.name , transport %></td>
+          <td><%=  transport.price %></td>
+          <td><%=  transport.location.name %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+  <% end %>

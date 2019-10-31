@@ -53,8 +53,30 @@
     </table>
   <% else %>
     <ul><h2>Hotels List</h2>
+      <% i=0 %>
       <% @hotels.each do |hotel| %>
+        <% if (i<5) %>
+          <% i=i+1 %>
         <li><%= link_to hotel.name, hotel %></li>
+          <% end %>
+      <% end %>
+    </ul>
+    <ul><h2>Restaurants List</h2>
+      <% i=0 %>
+      <% @restaurants.each do |restaurant| %>
+        <% if (i<5) %>
+          <% i=i+1 %>
+          <li><%= link_to restaurant.name, restaurant %></li>
+        <% end %>
+      <% end %>
+    </ul>
+    <ul><h2>Transports List</h2>
+      <% i=0 %>
+      <% @transports.each do |transport| %>
+        <% if (i<5) %>
+          <% i=i+1 %>
+          <li><%= link_to transport.name, transport %></li>
+        <% end %>
       <% end %>
     </ul>
   <% end %>
