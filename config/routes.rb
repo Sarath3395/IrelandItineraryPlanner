@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :liked_locations
   resources :liked_transports
   resources :liked_restaurants
@@ -7,8 +8,10 @@ Rails.application.routes.draw do
   resources :liked_hotels
   resources :hotels
   resources :locations
-  get '/search' => 'search#searchbylocation'
-  post '/search' => 'search#searchbylocation'
+
+  post '/search' => 'search#searchmethod'
+  get '/adminpage' => 'admin#adminhome'
+
 
   devise_for :users, :controllers => {:omniauth_callbacks => "callbacks"}
 

@@ -8,11 +8,11 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
   </head>
 
   <body>
@@ -26,6 +26,11 @@
 
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/">Itineray Planner</a>
+  <% if user_signed_in? %>
+  <% if  current_user.admin == true %>
+      <a class="navbar-brand" href="/adminpage">Admin</a>
+    <% end %>
+    <% end %>
   <form class="form-inline">
     <% if user_signed_in? %>
     Logged in as &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
@@ -58,28 +63,28 @@
   </form>
 </nav>
 <div style="padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">
-<%= form_for :search, url: "/search" , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+<%= form_for :search, url: search_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 
   <span class="field">
-    <%= text_field_tag :fromdate %>
+    <%= text_field_tag :fromdate,  nil, placeholder: 'Enter From Date'%>
   </span>
     <span class="field">
-    <%= text_field_tag :todate %>
+    <%= text_field_tag :todate,  nil, placeholder: 'Enter To Date' %>
   </span>
       <span class="field">
-    <%= text_field_tag :noofpersons %>
+    <%= text_field_tag :noofpersons,  nil, placeholder: 'Enter Number of Persons' %>
   </span>
 
       <span class="field">
-    <%= text_field_tag :noofrooms %>
+    <%= text_field_tag :noofrooms,  nil, placeholder: 'Enter Number of Rooms' %>
   </span>
 
         <span class="field">
-    <%= text_field_tag :searchtype%>
+  <%= form.select :searchtype, [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']] %>
   </span>
 
         <span class="field">
-    <%= text_field_tag :priceplace %>
+    <%= text_field_tag :priceplace,  nil, placeholder: 'Enter Price or Place' %>
   </span>
 
   <span>

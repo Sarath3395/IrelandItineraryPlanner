@@ -1,0 +1,3 @@
+<a class="navbar-brand" href="/admin">Admin Dashboard</a>
+
+<%= line_chart User.group_by_day(:created_at).count %>
