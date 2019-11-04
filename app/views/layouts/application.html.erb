@@ -26,6 +26,11 @@
 
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/">Itineray Planner</a>
+  <% if user_signed_in? %>
+  <% if  current_user.admin == true %>
+      <a class="navbar-brand" href="/admin">Admin</a>
+    <% end %>
+    <% end %>
   <form class="form-inline">
     <% if user_signed_in? %>
     Logged in as &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
