@@ -93,8 +93,10 @@ GEM
     ffi (1.11.1-x64-mingw32)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+
     groupdate (4.2.0)
       activesupport (>= 5)
+
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -304,7 +306,9 @@ DEPENDENCIES
   devise
   groupdate
   jbuilder (~> 2.7)
+
   nokogiri
+
   omniauth-facebook
   omniauth-google-oauth2
   pg

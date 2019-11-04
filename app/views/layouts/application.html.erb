@@ -28,7 +28,9 @@
   <a class="navbar-brand" href="/">Itineray Planner</a>
   <% if user_signed_in? %>
   <% if  current_user.admin == true %>
+
       <a class="navbar-brand" href="/adminpage">Admin</a>
+
     <% end %>
     <% end %>
   <form class="form-inline">
