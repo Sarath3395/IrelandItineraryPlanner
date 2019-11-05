@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   post '/search' => 'search#searchmethod'
   get '/adminpage' => 'admin#adminhome'
+  post '/adminpage' => 'admin#adminhome'
+
 
 
   devise_for :users, :controllers => {:omniauth_callbacks => "callbacks"}

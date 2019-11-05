@@ -66,10 +66,10 @@
 <%= form_for :search, url: search_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 
   <span class="field">
-    <%= text_field_tag :fromdate,  nil, placeholder: 'Enter From Date'%>
+    <%= form.date_field :fromdate%>
   </span>
     <span class="field">
-    <%= text_field_tag :todate,  nil, placeholder: 'Enter To Date' %>
+      <%= form.date_field :todate%>
   </span>
       <span class="field">
     <%= text_field_tag :noofpersons,  nil, placeholder: 'Enter Number of Persons' %>

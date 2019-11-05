@@ -1,3 +1,36 @@
+<table><h2>Search Result Based on Location</h2>
+  <tr>
+    <th>Hotel</th>
+  </tr>
+  <tr>
+    <td>Name</td>
+    <td>Rank</td>
+    <td>Location</td>
+    <td>Address</td>
+    <td>Roomtype</td>
+    <td>Bedtype</td>
+    <td>rice</td>
+  </tr>
+
+  <% @scrappedHotels.each do |hotel| -%>
+    <tr>
+    <% hotel.each do |key, value| -%>
+        <td><%= value %></td>
+    <% end %>
+    </tr>
+  <% end -%>
+
+
+
+</table>
+
+
+
+
+
+
+
+
 <% if @hotels.empty? %>
   <h2> No hotels found under selected criteria!!! Please Search again.</h2>
 <% else %>
@@ -6,13 +39,13 @@
       <th>Hotel</th>
     </tr>
     <% i=0 %>
-    <% @hotels.each do |hotel| %>
+    <% @scrappedHotels.each do |hotel| %>
       <% if (i < 5) %>
         <% i=i+1 %>
         <tr>
           <td><%= link_to hotel.name , hotel %></td>
-          <td><%=  hotel.price %></td>
-          <td><%=  hotel.location.name %></td>
+          <td><%=  hotel.address %></td>
+
         </tr>
       <% end %>
     <% end %>

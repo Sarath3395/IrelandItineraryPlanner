@@ -1,3 +1,11 @@
 <a class="navbar-brand" href="/admin">Admin Dashboard</a>
+<%= form_for :chart, url: adminpage_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+<h3>Please Select a Chart Type</h3>
+  <%= form.select :charttype, [['Line Chart','linechart'],['Pie Chart','piechart']] %>
 
+  <%= form.submit "Generate" ,{class: "btn btn-primary"} %>
+  <% end %>
+<% if @linechartindicator == true %>
+  <h2>User Registration Line Chart</h2>
 <%= line_chart User.group_by_day(:created_at).count %>
+<% end %>
