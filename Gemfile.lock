@@ -64,7 +64,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
-    bookingscrapper (1.1.1)
+    bookingscrapper (2.0.0)
       nokogiri
       watir
     bootsnap (1.4.5)
