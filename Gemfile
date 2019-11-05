@@ -19,6 +19,7 @@ gem 'recommendationforuser'
 gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'
+gem 'bookingscrapper'
 
 
 # Use Puma as the app server
