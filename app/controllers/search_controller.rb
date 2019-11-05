@@ -1,5 +1,6 @@
 require 'date'
-require 'bookingscrapper'
+#require 'bookingscrapper'
+
 class SearchController < ApplicationController
 
     def searchmethod
