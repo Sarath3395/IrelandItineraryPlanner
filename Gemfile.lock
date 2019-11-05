@@ -64,7 +64,9 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.13)
     bindex (0.8.1)
-    bookingscrapper (1.1.0)
+    bookingscrapper (1.1.1)
+      nokogiri
+      watir
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.3)
@@ -296,7 +298,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  bookingscrapper (~> 1.1)
+  bookingscrapper
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)
