@@ -296,7 +296,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  bookingscrapper
+  bookingscrapper (~> 1.1)
   bootsnap (>= 1.4.2)
   byebug
   capybara (>= 2.15)

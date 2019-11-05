@@ -17,6 +17,9 @@ gem 'sqlite3'
 end
 gem 'recommendationforuser'
 gem 'rails_admin'
+gem 'nokogiri'
+gem 'watir'
+gem 'bookingscrapper', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets
@@ -56,12 +59,6 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
-
-gem 'nokogiri'
-gem 'watir'
-gem 'bookingscrapper'
-
-
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
