@@ -1,4 +1,4 @@
-require 'bookingscrapper'
+require 'BookingScrapper'
 
 class SearchController < ApplicationController
 
