@@ -69,6 +69,8 @@ class SearchController < ApplicationController
 
       result = BookingScrapper.scrape(finalurl)
 
+
+
      #puts @scrappedHotels
       @scrappedHotels = []
       result.each_with_index do |val, index|
@@ -76,7 +78,9 @@ class SearchController < ApplicationController
 
         #puts "#{val} => #{index}"
       end
-
+      puts"before------------------"
+      savehotel
+      puts"after------------------"
       fromdate = params[:fromdate]
       todate =params[:todate]
       noofpersons = params[:noofpersons]
@@ -87,5 +91,21 @@ class SearchController < ApplicationController
       @transports = Transport.where(departure: fromdate, arrival: todate,price: priceplace)
 
 
-      end
+    end
+  def savehotel
+
+
+
+puts"insidefun---------------------"
+@scrappedHotels.each do |h|
+puts h
+puts"end====================fun"
+end
+
+
+
+
+
+
+  end
   end
