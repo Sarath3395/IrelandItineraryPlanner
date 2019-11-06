@@ -82,12 +82,17 @@
   </span>
 
         <span class="field">
-  <%= form.select :searchtype, [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']] %>
+  <%= form.select :searchtype,  [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']], :id => "searchtype" %>
   </span>
 
-        <span class="field">
-    <%= text_field_tag :priceplace,  nil, placeholder: 'Enter Price or Place' %>
-  </span>
+      <span class="field">
+        <%= form.select :price, [['0€ to 50€','1'],['50€ to 100€','2'],['100€ to 150€','3'],['150€ to 200€','4']], :id => "price"  %>
+      </span>
+
+      <span class="field">
+        <%= form.select :place, options_for_select( @locations.collect { |location| [location.name, location.scrapper_id] } ) , :id => "place" %>
+      </span>
+
 
   <span>
   <%= form.submit "Search" ,{class: "btn btn-primary"} %>

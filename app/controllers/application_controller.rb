@@ -1,12 +1,11 @@
 
 class ApplicationController < ActionController::Base
 
-#sublime text
 
-#niranjan
-#Sarath
+  before_action :set_locations
 
-
-#This is iddidiidid
+  def set_locations
+    @locations = Location.all
+  end
 
 end
