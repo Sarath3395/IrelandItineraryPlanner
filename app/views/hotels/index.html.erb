@@ -5,12 +5,13 @@
 <table>
   <thead>
     <tr>
+      <th>Hotel ID</th>
       <th>Name</th>
       <th>Roomtype</th>
-      <th>Fromdate</th>
+
       <th>Coordinates</th>
       <th>Address</th>
-      <th>Todate</th>
+
       <th>Price</th>
       <th>Noofrooms</th>
       <th>Noofperson</th>
@@ -23,12 +24,13 @@
   <tbody>
     <% @hotels.each do |hotel| %>
       <tr>
+        <td><%= hotel.id %></td>
         <td><%= hotel.name %></td>
         <td><%= hotel.roomtype %></td>
-        <td><%= hotel.fromdate %></td>
+
         <td><%= hotel.coordinates %></td>
         <td><%= hotel.address %></td>
-        <td><%= hotel.todate %></td>
+
         <td><%= hotel.price %></td>
         <td><%= hotel.noofrooms %></td>
         <td><%= hotel.noofperson %></td>

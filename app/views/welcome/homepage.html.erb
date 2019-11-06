@@ -1,7 +1,12 @@
   <% if user_signed_in? %>
     <table><h2>Recommended Hotels for you!!!</h2>
       <tr>
-        <th>Hotels</th>
+        <th>HotelName</th>
+        <th>Address</th>
+        <th>Location</th>
+        <th>Price</th>
+        <th>Rating</th>
+
       </tr>
       <% i=0 %>
       <% @user.recommend_hotels.each do |key, value| %>
@@ -12,6 +17,7 @@
             <td><%=  key.address %></td>
             <td><%=  key.location.name %></td>
             <td><%=  key.price %></td>
+            <td><%= value.round(2) %></td>
           </tr>
         <% end %>
       <% end %>

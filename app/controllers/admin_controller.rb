@@ -6,8 +6,10 @@ class AdminController < ApplicationController
 
     if params[:commit] == 'Generate'
       charttype = params[:chart][:charttype]
-      if(charttype == "linechart")
-      @linechartindicator = true
+      if(charttype == "userlinechart")
+      @userlinechartindicator = true
+      elsif(charttype == "hotellinechart")
+        @hotellinechartindicator = true
       end
     else
       puts "elseeeeeeeeeeeeeeeee"
