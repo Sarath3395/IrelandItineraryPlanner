@@ -130,7 +130,7 @@ val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
 
       #puts "#{val} => #{index}"
     end
-    #updatehotelstable
+    updatehotelstable
   end
 
   def updatehotelstable
