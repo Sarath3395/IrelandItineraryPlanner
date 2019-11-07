@@ -5,6 +5,25 @@ class LikedHotelsController < ApplicationController
   # GET /liked_hotels.json
   def index
     @liked_hotels = LikedHotel.all
+    if (params[:hotel_id] == nil)
+
+    else
+      @user = current_user.id
+      @hotel = Hotel.find(params[:hotel_id])
+
+      likes = {user_id: @user, hotel_id: @hotel.id}
+      @liked_hotel = LikedHotel.new(likes)
+
+      @liked_hotel.save
+
+      if @liked_hotel.save
+        redirect_to root_path
+      else
+        redirect_to @hotel
+      end
+
+    end
+
   end
 
   # GET /liked_hotels/1
@@ -62,13 +81,13 @@ class LikedHotelsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_liked_hotel
-      @liked_hotel = LikedHotel.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_liked_hotel
+    @liked_hotel = LikedHotel.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def liked_hotel_params
-      params.require(:liked_hotel).permit(:user_id, :hotel_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def liked_hotel_params
+    params.require(:liked_hotel).permit(:user_id, :hotel_id)
+  end
 end
