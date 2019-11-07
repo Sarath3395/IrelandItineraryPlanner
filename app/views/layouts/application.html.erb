@@ -13,6 +13,15 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+      .locationdiv {
+        display: none;
+      }
+      .pricediv {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -49,7 +58,7 @@
 
 
     <% else %>
-      <a  href="/auth/google_oauth2" >Google SignIn</a>
+      <a  href="/auth/google_oauth2" >Google SignIn &nbsp; </a>
 
       <a class="btn btn-outline-primary" href="<%=new_user_session_path%>" role="button">
     Login
@@ -66,37 +75,46 @@
 </nav>
 <div style="padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">
 <%= form_for :search, url: search_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+    <div class="row">
+      <div class="col-sm-2">
+        <label class="font-weight-bold" for="fromdate">Check-in date</label>
+    <%= form.date_field :fromdate ,{class: "form-control", id:"fromdate"}%>
+  </div>
+    <div class="col-sm-2">
+      <label class="font-weight-bold" for="todate">Check-out date</label>
+      <%= form.date_field :todate,{class: "form-control" , id:"todate"}%>
+  </div>
+      <div class="col-sm-2">
+        <label class="font-weight-bold" for="noofpersons">No.of Persons</label>
+        <%= form.select :noofpersons,  [['1 adult','1'],['2 adults','2'],['3 adults','3'],['4 adults','4'],['5 adults','5'],['6 adults','6'],['7 adults','7'],['8 adults','8'],['9 adults','9'],['10 adults','10'],['11 adults','11'],['12 adults','12']], {},:class => "form-control",:id => "noofpersons" %>
+  </div>
 
-  <span class="field">
-    <%= form.date_field :fromdate%>
-  </span>
-    <span class="field">
-      <%= form.date_field :todate%>
-  </span>
-      <span class="field">
-    <%= text_field_tag :noofpersons,  nil, placeholder: 'Enter Number of Persons' %>
-  </span>
+      <div class="col-sm-1">
+        <label class="font-weight-bold" for="noofrooms">No.of rooms</label>
+        <%= form.select :noofrooms,  [['1 room','1'],['2 rooms','2'],['3 rooms','3'],['4 rooms','4'],['5 rooms','5'],['6 rooms','6'],['7 rooms','7'],['8 rooms','8'],['9 rooms','9'],['10 rooms','10'],['11 rooms','11'],['12 rooms','12']],{},:class => "form-control",:id => "noofrooms" %>
+  </div>
 
-      <span class="field">
-    <%= text_field_tag :noofrooms,  nil, placeholder: 'Enter Number of Rooms' %>
-  </span>
+        <div class="col-sm-2">
+          <label class="font-weight-bold" for="searchtype">Search type</label>
+  <%= form.select :searchtype,  [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']], {},:class => "form-control", :id => "searchtype" %>
+  </div>
 
-        <span class="field">
-  <%= form.select :searchtype,  [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']], :id => "searchtype" %>
-  </span>
+      <div class="col-sm-2 pricediv form-group">
+        <label class="font-weight-bold" for="price">Price range</label>
+        <%= form.select :price, [['0€ to 25€','1'],['25€ to 50€','2'],['50€ to 75€','3'],['75€ to 100€','4']], {},:class => "form-control", :id => "price"  %>
+      </div>
 
-      <span class="field">
-        <%= form.select :price, [['0€ to 50€','1'],['50€ to 100€','2'],['100€ to 150€','3'],['150€ to 200€','4']], :id => "price"  %>
-      </span>
-
-      <span class="field">
-        <%= form.select :place, options_for_select( @locations.collect { |location| [location.name, location.scrapper_id] } ) , :id => "place" %>
-      </span>
+      <div class="col-sm-2 locationdiv form-group">
+        <label class="font-weight-bold" for="place">Places</label>
+        <%= form.select :place, options_for_select( @locations.collect { |location| [location.name, location.scrapper_id] } ) , {},:class => "form-control", :id => "place" %>
+      </div>
 
 
-  <span>
-  <%= form.submit "Search" ,{class: "btn btn-primary"} %>
-  </span>
+      <div class="col-sm-1 form-group">
+        <label class="font-weight-bold" for="submitbutton">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+      <%= form.submit "Search" ,{class: "btn btn-primary",id: "submitbutton"} %>
+       </div>
+    </div>
 <% end  %>
 </div>
     <div style="padding-left: 15px;">

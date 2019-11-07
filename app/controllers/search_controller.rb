@@ -26,10 +26,10 @@ class SearchController < ApplicationController
     todatestr = params[:search][:todate]
     fromdate = Date.strptime(fromdatestr, '%Y-%m-%d')
     todate = Date.strptime(todatestr, '%Y-%m-%d')
-    noofpersons = params[:noofpersons]
-    noofrooms = params[:noofrooms]
+    noofpersons = params[:search][:noofpersons]
+    noofrooms = params[:search][:noofrooms]
     location_scrapperid = params[:search][:place]
-
+    @searchresultsstr = "From #{fromdatestr} to #{todatestr} for #{noofpersons} adults and  #{noofrooms} room(s) based on selected location"
     str1 = "ss=Dublin&"
     str2 = "is_ski_area=0&"
     str3 = "ssne=Dublin&"
@@ -58,15 +58,23 @@ class SearchController < ApplicationController
     @scrappedHotels = []
     result.each_with_index do |val, index|
 
-      if (val["roomtype"] ==nil || val["price"] ==nil)
-        val["roomtype"] = "NA"
-        val["price"]= "SOLD OUT"
-        val["bedtype"] = "NA"
-       end
       if( val["rank"] == nil)
         val["rank"] = "NA"
       end
-val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
+      if(val["roomtype"] ==nil)
+        val["roomtype"] = "NA"
+      end
+      if(val["price"] ==nil)
+        val["price"]= "SOLD OUT"
+      else
+        temp= val["price"]
+        val["price"]= "Price: € #{temp}"
+      end
+      if(val["bedtype"]==nil)
+        val["bedtype"] = "NA"
+      end
+
+      val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
       puts"sssssssssssssssssssssssssssssssssssss"
       puts val["location_id"]
       @scrappedHotels << val
@@ -75,19 +83,20 @@ val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
     end
 
     puts @scrappedHotels
-    updatehotelstable
+    #updatehotelstable
   end
 
   def searchbyprice
 
     defaultUrl = "https://www.booking.com/searchresults.en-us.html?aid=397594&label=gog235jc-1DCAEoggI46AdIM1gDaGmIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AvDOhe4FwAIB&sid=6426bb78f6fe60bf3b783451f500e2a1&sb=1&src=index&src_elem=sb&error_url=https%3A%2F%2Fwww.booking.com%2Findex.html%3Faid%3D397594%3Blabel%3Dgog235jc-1DCAEoggI46AdIM1gDaGmIAQGYATG4ARfIAQzYAQPoAQH4AQKIAgGoAgO4AvDOhe4FwAIB%3Bsid%3D6426bb78f6fe60bf3b783451f500e2a1%3Bsb_price_type%3Dtotal%26%3B&"
 
+
     fromdatestr = params[:search][:fromdate]
     todatestr = params[:search][:todate]
     fromdate = Date.strptime(fromdatestr, '%Y-%m-%d')
     todate = Date.strptime(todatestr, '%Y-%m-%d')
-    noofpersons = params[:noofpersons]
-    noofrooms = params[:noofrooms]
+    noofpersons = params[:search][:noofpersons]
+    noofrooms = params[:search][:noofrooms]
     price = params[:search][:price]
     str1 = "ss=Dublin&"
     str2 = "is_ski_area=0&"
@@ -107,30 +116,39 @@ val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
     str16 = "nflt=pri%3D#{price}%3B&"
     str17 = "b_h4u_keep_filters=&"
     str18 = "from_sf=1"
+    @searchresultsstr = "From #{fromdatestr} to #{todatestr} for #{noofpersons} adults and  #{noofrooms} room(s) based on selected price"
 
     finalurl = defaultUrl+str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12+str13+str14+str15+str16+str17+str18
 
     result = BookingScrapper.scrape(finalurl)
 
-
+    puts result
 
     #puts @scrappedHotels
     @scrappedHotels = []
     result.each_with_index do |val, index|
 
-      if (val["roomtype"] ==nil || val["price"] ==nil)
-        val["roomtype"] = "NA"
-        val["price"]= "SOLD OUT"
-        val["bedtype"] = "NA"
-      end
       if( val["rank"] == nil)
         val["rank"] = "NA"
       end
+      if(val["roomtype"] ==nil)
+        val["roomtype"] = "NA"
+      end
+      if(val["price"] ==nil)
+        val["price"]= "SOLD OUT"
+      else
+        temp= val["price"]
+        val["price"]= "€ #{temp}"
+      end
+      if(val["bedtype"]==nil)
+        val["bedtype"] = "NA"
+      end
+
       @scrappedHotels << val
 
       #puts "#{val} => #{index}"
     end
-    updatehotelstable
+    #updatehotelstable
   end
 
   def updatehotelstable
