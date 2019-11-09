@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   get '/adminpage' => 'admin#adminhome'
   post '/adminpage' => 'admin#adminhome'
 
-  get '/liked_hotels' => 'liked_hotels#like'
-  post '/liked_hotels' => 'liked_hotels#like'
-  get '/liked_restaurants' => 'liked_restaurants#like'
-  post '/liked_restaurants' => 'liked_restaurants#like'
+
+  get 'like' => 'like#index'
+  post 'like' => 'like#index'
+
+
 
 
 

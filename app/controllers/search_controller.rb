@@ -83,7 +83,7 @@ class SearchController < ApplicationController
     end
 
     puts @scrappedHotels
-    #updatehotelstable
+    updatehotelstable
   end
 
   def searchbyprice

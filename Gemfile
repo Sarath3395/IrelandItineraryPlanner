@@ -18,6 +18,7 @@ group :development, :test do
 gem 'sqlite3'
 end
 gem 'recommendationforuser'
+gem 'favoriteshandler'
 gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'

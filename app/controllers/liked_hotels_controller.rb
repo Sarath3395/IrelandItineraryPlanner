@@ -5,24 +5,6 @@ class LikedHotelsController < ApplicationController
   # GET /liked_hotels.json
   def index
     @liked_hotels = LikedHotel.all
-    if (params[:hotel_id] == nil)
-
-    else
-      @user = current_user.id
-      @hotel = Hotel.find(params[:hotel_id])
-
-      likes = {user_id: @user, hotel_id: @hotel.id}
-      @liked_hotel = LikedHotel.new(likes)
-
-      @liked_hotel.save
-
-      if @liked_hotel.save
-        redirect_to root_path
-      else
-        redirect_to @hotel
-      end
-
-    end
 
   end
 

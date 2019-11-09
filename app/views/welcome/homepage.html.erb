@@ -1,33 +1,9 @@
   <% if user_signed_in? %>
 
     <% if @user.recommend_hotels == [] %>
-      <h2>Hotels List</h2>
-      <div class="row">
-        <% i=0 %>
-        <% @hotels.each do |hotel| -%>
-          <% if (i < 6) %>
-            <% i=i+1 %>
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= link_to hotel.name, hotel %></h5>
-                  <p class="card-text"><%= hotel.address %></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <%= link_to "Like", {:controller => "liked_hotels", :action => "like", method: :post, :hotel_id => hotel.id }%>
+      <h2>Recommendation For Hotel is Not Available.</h2>
+      (Please add some favorites or All the Recommendations are added to favorites)
 
-                  <li class="list-group-item">Rank :<%= hotel.rank %></li>
-                  <li class="list-group-item">Price :<%= hotel.price   %></li>
-                </ul>
-                <div class="card-body">
-                  <!--<a href="#" class="btn btn-primary">Search</a> -->
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end -%>
-        <br>
-      </div>
 
       <% else %>
     <table><h2>Recommended Hotels for you!!!</h2>
@@ -42,13 +18,12 @@
             <div class="card-body">
               <h5 class="card-title"><%= link_to key.name , key %></h5>
               <p class="card-text"><%= key.address %></p>
+              <p class="card-text"><%= link_to "Add to favorite", {:controller => "like", :action => "index", method: :post, :hotel_id => key.id }%></p>
             </div>
             <ul class="list-group list-group-flush">
-              <%= link_to "Like", {:controller => "liked_hotels", :action => "like", method: :post, :hotel_id => key.id }%>
 
               <li class="list-group-item">Rank :<%= key.rank %></li>
               <li class="list-group-item">Recommendation Rating :<%= value.round(2) %></li>
-              <li class="list-group-item">Price :€<%= key.price %></li>
             </ul>
             <div class="card-body">
               <!--<a href="#" class="btn btn-primary">Search</a> -->
@@ -64,32 +39,9 @@
     <% end %>
 <% if @user.recommend_restaurants == []  %>
 
-      <h2>Restaurants List</h2>
-      <div class="row">
-        <% i=0 %>
-        <% @restaurants.each do |restaurant| -%>
-          <% if (i < 6) %>
-            <% i=i+1 %>
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= link_to restaurant.name, restaurant %></h5>
-                  <p class="card-text"><%= restaurant.location.name %></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <%= link_to "Like", {:controller => "liked_restaurants", :action => "like", method: :post, :restaurant_id => restaurant.id }%>
+      <h2>Recommendation for restaurant in not available</h2>
+      (please add some restaurants to favorite or all the recommendation are added to favorites)
 
-                  <li class="list-group-item">Price :<%= restaurant.price %></li>
-                </ul>
-                <div class="card-body">
-                  <!--<a href="#" class="btn btn-primary">Search</a> -->
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end -%>
-        <br>
-      </div>
 
       <% else %>
     <h2>Recommended Restaurants for you!!!</h2>
@@ -105,13 +57,13 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= link_to key.name , key %></h5>
                   <p class="card-text"><%= key.location.name %></p>
+
+                    <p class="card-text"><%= link_to "Add to favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => key.id }%></p>
                 </div>
                 <ul class="list-group list-group-flush">
-                  <%= link_to "Like", {:controller => "liked_restaurants", :action => "like", method: :post, :restaurant_id => key.id }%>
 
                   <li class="list-group-item">Rank :<%= key.foodtype %></li>
                   <li class="list-group-item">Recommendation Rating :<%= value.round(2) %></li>
-                  <li class="list-group-item">Price :€<%= key.price %></li>
                 </ul>
                 <div class="card-body">
                   <!--<a href="#" class="btn btn-primary">Search</a> -->
@@ -128,31 +80,9 @@
       <% end %>
     <% if @user.recommend_transports == [] %>
 
-      <h2>Transports List</h2>
+      <h2>Recommendation for Transport is not available.</h2>
+      (please add some transport to favorite or all the recommendation are added to favorites)
 
-      <div class="row">
-        <% i=0 %>
-        <% @transports.each do |transport| -%>
-          <% if (i < 6) %>
-            <% i=i+1 %>
-            <div class="col-sm-4">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title"><%= link_to transport.name, transport %></h5>
-                  <p class="card-text"><%= transport.location.name %></p>
-                </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">Price :<%= transport.price %></li>
-                </ul>
-                <div class="card-body">
-                  <!--<a href="#" class="btn btn-primary">Search</a> -->
-                </div>
-              </div>
-            </div>
-          <% end %>
-        <% end -%>
-        <br>
-      </div>
 
       <% else %>
     <table><h2>Recommended Transports for you!!!</h2>
@@ -167,12 +97,12 @@
                 <div class="card-body">
                   <h5 class="card-title"><%= link_to key.name , key %></h5>
                   <p class="card-text"><%= key.location.name %></p>
+                  <p class="card-text"><%= link_to "Add to favorite", {:controller => "like", :action => "index", method: :post, :transport_id => key.id }%></p>
+
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Rank :<%= key.transporttype %></li>
-                  <li class="list-group-item">Recommendation Rating :<%= value.round(2) %></li>
-                  <li class="list-group-item">Price :€<%= key.price %></li>
-                </ul>
+                  <li class="list-group-item">Recommendation Rating :<%= value.round(2) %></li</ul>
                 <div class="card-body">
                   <!--<a href="#" class="btn btn-primary">Search</a> -->
                 </div>
@@ -201,7 +131,6 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item">Rank :<%= hotel.rank %></li>
-                  <li class="list-group-item">Price :<%= hotel.price   %></li>
                 </ul>
                 <div class="card-body">
                   <!--<a href="#" class="btn btn-primary">Search</a> -->
@@ -255,7 +184,6 @@
               <p class="card-text"><%= transport.location.name %></p>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item">Price :<%= transport.price %></li>
             </ul>
             <div class="card-body">
               <!--<a href="#" class="btn btn-primary">Search</a> -->

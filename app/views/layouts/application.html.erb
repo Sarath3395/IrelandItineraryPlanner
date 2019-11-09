@@ -35,15 +35,19 @@
 
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/">Itineray Planner</a>
+  <a  href=hotels >Hotels &nbsp;</a>
+  <a  href=restaurants >Restaurants &nbsp;</a>
+  <a  href=transports >Transport &nbsp;</a>
   <% if user_signed_in? %>
   <% if  current_user.admin == true %>
 
-      <a class="navbar-brand" href="/adminpage">Admin</a>
+      <a href="/adminpage">Admin  </a>
 
     <% end %>
     <% end %>
   <form class="form-inline">
     <% if user_signed_in? %>
+      <a  href="like" >Favorites &nbsp; </a>
     Logged in as &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
 
     <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
