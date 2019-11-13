@@ -10,6 +10,8 @@ gem 'rails', '~> 6.0.0'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
+gem 'favoriteshandler'
+
 gem 'chartkick'
 gem 'groupdate'
 
@@ -18,7 +20,7 @@ group :development, :test do
 gem 'sqlite3'
 end
 gem 'recommendationforuser'
-gem 'favoriteshandler'
+
 gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'

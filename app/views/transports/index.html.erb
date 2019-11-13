@@ -1,4 +1,5 @@
 <h2>Transports List</h2>
+<% if user_signed_in? %>
 <div class="row">
   <% i=0 %>
   <% @transports.each do |transport| -%>
@@ -9,6 +10,12 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to transport.name, transport %></h5>
             <p class="card-text"><%= transport.location.name %></p>
+            <% lk = LikedTransport.where(user_id: current_user.id, transport_id: transport.id) %>
+            <% if lk == []%>
+              <p class="card-text"><%= link_to "Add to favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => transport.id }%></p>
+            <% else %>
+              <p class="card-text"><%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => transport.id }%></p>
+            <% end %>
           </div>
           <ul class="list-group list-group-flush">
           </ul>
@@ -21,3 +28,27 @@
   <% end -%>
   <br>
 </div>
+  <% else %>
+  <div class="row">
+    <% i=0 %>
+    <% @transports.each do |transport| -%>
+      <% if (i < 6) %>
+        <% i=i+1 %>
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to transport.name, transport %></h5>
+              <p class="card-text"><%= transport.location.name %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+            </ul>
+            <div class="card-body">
+              <!--<a href="#" class="btn btn-primary">Search</a> -->
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end -%>
+    <br>
+  </div>
+<% end %>

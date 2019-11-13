@@ -5,6 +5,7 @@ class RestaurantsController < ApplicationController
   # GET /restaurants.json
   def index
     @restaurants = Restaurant.all
+
   end
 
   # GET /restaurants/1
