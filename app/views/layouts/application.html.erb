@@ -38,6 +38,8 @@
   <a  href=hotels >Hotels &nbsp;</a>
   <a  href=restaurants >Restaurants &nbsp;</a>
   <a  href=transports >Transport &nbsp;</a>
+  <a  href=toprated >Top Rated &nbsp;</a>
+
   <% if user_signed_in? %>
   <% if  current_user.admin == true %>
 
@@ -48,7 +50,7 @@
   <form class="form-inline">
     <% if user_signed_in? %>
       <a  href="like" >Favorites &nbsp; </a>
-    Logged in as &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
+     &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
 
     <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
     Edit profile

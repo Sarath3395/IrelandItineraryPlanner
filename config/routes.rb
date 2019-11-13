@@ -16,7 +16,8 @@ Rails.application.routes.draw do
 
   get 'like' => 'like#index'
   post 'like' => 'like#index'
-
+  get 'toprated' => 'toprated#index'
+  post 'toprated' => 'toprated#index'
 
 
 

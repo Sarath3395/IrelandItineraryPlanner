@@ -5,6 +5,17 @@ class HotelsController < ApplicationController
   # GET /hotels.json
   def index
     @hotels = Hotel.all
+    if( user_signed_in? )
+      id = current_user.id
+      @user = User.find(id)
+      ids =[]
+      i=0
+      @user.recommend_hotels.each do |key,value|
+        i=i+1
+        ids[i]=key.id
+      end
+       @hotels = Hotel.all.where.not(id: ids)
+    end
   end
 
   # GET /hotels/1

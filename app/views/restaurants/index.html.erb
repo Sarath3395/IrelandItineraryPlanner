@@ -1,4 +1,5 @@
 <h2>Restaurants List</h2>
+<% if user_signed_in? %>
 <div class="row">
 
   <% @restaurants.each do |restaurant| -%>
@@ -8,6 +9,12 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to restaurant.name, restaurant %></h5>
             <p class="card-text"><%= restaurant.location.name %></p>
+            <% lk = LikedRestaurant.where(user_id: current_user.id, restaurant_id: restaurant.id) %>
+            <% if lk == []%>
+            <p class="card-text"><%= link_to "Add to favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => restaurant.id }%></p>
+              <% else %>
+              <p class="card-text"><%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => restaurant.id }%></p>
+          <% end %>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Price :<%= restaurant.price %></li>
@@ -21,3 +28,28 @@
 
   <br>
 </div>
+  <% else %>
+  <div class="row">
+
+    <% @restaurants.each do |restaurant| -%>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= link_to restaurant.name, restaurant %></h5>
+            <p class="card-text"><%= restaurant.location.name %></p>
+
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Price :<%= restaurant.price %></li>
+          </ul>
+          <div class="card-body">
+            <!--<a href="#" class="btn btn-primary">Search</a> -->
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <br>
+  </div>
+<% end %>
