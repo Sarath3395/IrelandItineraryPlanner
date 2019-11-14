@@ -1,14 +1,41 @@
+<a class="navbar-brand"  href='report_errors' >Reported Errors That are assigned to you!!!&nbsp;</a><br>
 <a class="navbar-brand" href="/admin">Admin Dashboard</a>
 <%= form_for :chart, url: adminpage_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 <h3>Please Select a Chart Type</h3>
-  <%= form.select :charttype, [['User Line Chart','userlinechart'],['Hotels Line Chart','hotellinechart']] %>
+
+Choose any one:
+  <div class="field">
+    Line Chart:
+    <%= check_box_tag 'line_chart', 'line_chart' %>
+  </div>
+  <div class="field">
+    Column Chart:
+    <%= check_box_tag 'column_chart', 'column_chart' %>
+  </div>
+
+
+
+  <%= form.select :tablename, [['Users','users'],['Hotels','hotels']] %>
 
   <%= form.submit "Generate" ,{class: "btn btn-primary"} %>
   <% end %>
-<% if @userlinechartindicator == true %>
+<% if @userindicator == true %>
+  <%= @final.draw %>
   <h2>User Registration Line Chart</h2>
+
+  <% if @final.draw.include? "Line Chart" %>
 <%= line_chart User.group_by_day(:created_at).count %>
-  <% elsif @hotellinechartindicator == true %>
+    <% end %>
+  <% if @final.draw.include? "Column Chart" %>
+  <%= column_chart User.group_by_week(:created_at).count %>
+    <% end %>
+  <% elsif @hotelindicator == true %>
   <h2>Hotel's Line Chart</h2>
+  <% if @final.draw.include? "Line Chart" %>
   <%= line_chart Hotel.group_by_day(:created_at).count %>
+    <% end %>
+  <% if @final.draw.include? "Column Chart" %>
+    <%= column_chart Hotel.group_by_week(:created_at).count %>
+
+  <% end %>
 <% end %>

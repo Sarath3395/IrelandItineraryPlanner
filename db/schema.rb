@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_06_125642) do
+ActiveRecord::Schema.define(version: 2019_11_13_235540) do
 
   create_table "hotels", force: :cascade do |t|
     t.string "name"
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(version: 2019_11_06_125642) do
     t.string "scrapper_id"
   end
 
+  create_table "report_errors", force: :cascade do |t|
+    t.string "errormessage"
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "assignstatus"
+    t.index ["user_id"], name: "index_report_errors_on_user_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "foodtype"
@@ -122,6 +131,7 @@ ActiveRecord::Schema.define(version: 2019_11_06_125642) do
   add_foreign_key "liked_restaurants", "users"
   add_foreign_key "liked_transports", "transports"
   add_foreign_key "liked_transports", "users"
+  add_foreign_key "report_errors", "users"
   add_foreign_key "restaurants", "locations"
   add_foreign_key "transports", "locations"
 end

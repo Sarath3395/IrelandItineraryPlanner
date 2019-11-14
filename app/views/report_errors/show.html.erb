@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Errormessage:</strong>
+  <%= @report_error.errormessage %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @report_error.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_report_error_path(@report_error) %> |
+<%= link_to 'Back', report_errors_path %>
