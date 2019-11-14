@@ -3,7 +3,7 @@
 <%= form_for :chart, url: adminpage_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
 <h3>Please Select a Chart Type</h3>
 
-Choose any one:
+Please Select any ChartTypes and TableName
   <div class="field">
     Line Chart:
     <%= check_box_tag 'line_chart', 'line_chart' %>
@@ -12,7 +12,6 @@ Choose any one:
     Column Chart:
     <%= check_box_tag 'column_chart', 'column_chart' %>
   </div>
-
 
 
   <%= form.select :tablename, [['Users','users'],['Hotels','hotels']] %>
