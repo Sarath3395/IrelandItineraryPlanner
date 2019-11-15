@@ -114,7 +114,7 @@
 
       <div class="col-sm-2 locationdiv form-group">
         <label class="font-weight-bold" for="place">Places</label>
-        <%= form.select :place, options_for_select( @locations.collect { |location| [location.name, location.scrapper_id] } ) , {},:class => "form-control", :id => "place" %>
+        <%= form.select :place, options_for_select( (Location.all).collect { |location| [location.name, location.scrapper_id] } ) , {},:class => "form-control", :id => "place" %>
       </div>
 
 
