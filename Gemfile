@@ -17,11 +17,12 @@ gem 'favoriteshandler'
 gem 'chartkick'
 gem 'groupdate'
 
-
+gem 'rails-observers'
 group :development, :test do
 gem 'sqlite3'
 end
 gem 'recommendationforuser'
+gem 'rails-observers'
 
 gem 'rails_admin'
 gem 'nokogiri'

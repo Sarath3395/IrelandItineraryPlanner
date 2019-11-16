@@ -1,6 +1,5 @@
-require 'observer'
+require 'my_logger'
 class ReportErrorsController < ApplicationController
-  include Observable
   before_action :set_report_error, only: [:show, :edit, :update, :destroy]
 
   # GET /report_errors
@@ -30,17 +29,18 @@ class ReportErrorsController < ApplicationController
     #sorted = Hash.new(0)
     adminusers = User.where(admin: true)
     aduser = adminusers.order("RANDOM()")
-    puts aduser.first.id
     @report_error.user_id = aduser.first.id
 
     respond_to do |format|
       if @report_error.save
-        add_observer(ErrorObserver.new)
+        # retrieve the instance/object of the MyLogger class
+        logger = MyLogger.instance
+        logger.logInformation("An error is with the error message: " + @report_error.errormessage)
+        #add_observer(ErrorObserver.new)
 
-        changed
-        notify_observers(self, @report_error)
-        puts " notifiedddddddddddddddd\n"
-        format.html { redirect_to root_path, notice: 'Report error was successfully created.' }
+        #changed
+        #notify_observers(self, @report_error)
+        format.html { redirect_to root_path, notice: 'Error is reported and an Email was sent to the Assigned User.' }
         format.json { render :show, status: :created, location: @report_error }
       else
         format.html { render :new }

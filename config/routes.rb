@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'new_report_error_path' => 'report_errors#new'
 
 
-  devise_for :users, :controllers => {:omniauth_callbacks => "callbacks",registrations: 'users/registrations', passwords: "user/passwords", sessions: "users/sessions"} do
+  devise_for :users, :controllers => {:omniauth_callbacks => "callbacks",registrations: 'users/registrations', sessions: "users/sessions"} do
 
   end
 

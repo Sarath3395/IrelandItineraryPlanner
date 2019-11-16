@@ -35,11 +35,11 @@
 
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/">Itineray Planner</a>
-  <a  href=hotels >Hotels &nbsp;</a>
-  <a  href=restaurants >Restaurants &nbsp;</a>
-  <a  href=transports >Transport &nbsp;</a>
-  <a  href=toprated >Top Rated &nbsp;</a>
-  <a  href=new_report_error_path >Report Errors &nbsp;</a>
+  <a  href='/hotels/' >Hotels &nbsp;</a>
+  <a  href='/restaurants/' >Restaurants &nbsp;</a>
+  <a  href='/transports/' >Transport &nbsp;</a>
+  <a  href='/toprated/' >Top Rated &nbsp;</a>
+  <a  href='/new_report_error_path/' >Report Errors &nbsp;</a>
 
 
   <% if user_signed_in? %>
@@ -51,7 +51,7 @@
     <% end %>
   <form class="form-inline">
     <% if user_signed_in? %>
-      <a  href="like" >Favorites &nbsp; </a>
+      <a  href="/like/" >Favorites &nbsp; </a>
      &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
 
     <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
