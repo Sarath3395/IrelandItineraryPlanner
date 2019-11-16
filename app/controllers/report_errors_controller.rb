@@ -40,7 +40,7 @@ class ReportErrorsController < ApplicationController
 
         #changed
         #notify_observers(self, @report_error)
-        format.html { redirect_to root_path, notice: 'Error is reported and an Email was sent to the Assigned User.' }
+        format.html { redirect_to root_path, notice: 'An Email was sent to the assigned user for the reported error.' }
         format.json { render :show, status: :created, location: @report_error }
       else
         format.html { render :new }
