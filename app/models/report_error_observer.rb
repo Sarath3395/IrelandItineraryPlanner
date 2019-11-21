@@ -1,7 +1,6 @@
 require 'my_logger'
 class ReportErrorObserver < ActiveRecord::Observer
   def after_create(record)
-    puts "innnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn"
     tmp = ReportError.find_by_id(record.id)
     tmp.assignstatus = "Successfully Added to User_id#{record.user_id}"
     tmp.save
