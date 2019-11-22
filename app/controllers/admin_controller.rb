@@ -29,7 +29,7 @@ class AdminController < ApplicationController
         @hotelindicator = true
       end
     else
-      puts "elseeeeeeeeeeeeeeeee"
+
     end
 
 

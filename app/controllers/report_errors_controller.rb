@@ -36,16 +36,63 @@ class ReportErrorsController < ApplicationController
   end
 
   def viewlogs
-    linenumber_check = params[:linenumber_check]
-    puts "valllllllllll#{linenumber_check}"
 
-    numberedlog
-    send_file(
-        "#{Rails.root}/ReportedErrorsLog.txt",
-        filename: "ReportedErrorsLog.txt",
-        type: "txt",
-    disposition: 'attachment'
-    )
+
+    if params[:commit] == 'ViewErrorReportedLogs'
+      if params[:linenumber_check].to_s.length > 0 then
+        numberedlog
+        send_file(
+            "#{Rails.root}/ReportedErrorsLog.txt",
+            filename: "ReportedErrorsLog.txt",
+            type: "txt",
+            disposition: 'attachment'
+            )
+      else
+        File.open("ReportedErrorsLog.txt",'w') do |filea|
+          File.open("mylog.txt",'r') do |fileb|
+            while line = fileb.gets
+              filea.puts line
+            end
+          end
+
+
+        end
+        send_file(
+            "#{Rails.root}/ReportedErrorsLog.txt",
+            filename: "ReportedErrorsLog.txt",
+            type: "txt",
+            disposition: 'attachment'
+        )
+      end
+    else
+      if params[:linenumber_check].to_s.length > 0 then
+        numberedlog
+        send_file(
+            "#{Rails.root}/ReportedErrorsLog.txt",
+            filename: "ReportedErrorsLog.txt",
+            type: "txt",
+            disposition: 'attachment'
+        )
+      else
+        File.open("ReportedErrorsLog.txt",'w') do |filea|
+          File.open("mylog.txt",'r') do |fileb|
+            while line = fileb.gets
+              filea.puts line
+            end
+          end
+
+
+        end
+        send_file(
+            "#{Rails.root}/ReportedErrorsLog.txt",
+            filename: "ReportedErrorsLog.txt",
+            type: "txt",
+            disposition: 'attachment'
+        )
+      end
+
+    end
+
   end
   # POST /report_errors
   # POST /report_errors.json

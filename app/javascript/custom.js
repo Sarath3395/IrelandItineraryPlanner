@@ -3,7 +3,7 @@
 
 $(document).ready(function() {
 
-
+    $('#ViewErrorReportedLogs').removeAttr('data-disable-with');
 
    $(".pricediv").slideDown(100);
 

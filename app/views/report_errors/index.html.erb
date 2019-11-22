@@ -24,13 +24,25 @@
     <% end %>
   </tbody>
 </table>
-  <div class="field">
-    Please check below box if you want to include line number to the log file:
-    <br>
-    <%= check_box_tag 'Include Line Number', 'linenumber_check' %>
-  </div>
-  <td><%= link_to 'ViewLogs', 'viewlogs'  %></td>
-  <br>
+  <%= form_for :viewlogs, url: '/viewlogs' , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+    <div class="field">
+      Please check below box if you want to include line number to the log file:
+      <br>
+
+      <div class="field">
+        Include Line Number:
+        <%= check_box_tag 'linenumber_check', 'linenumber_check' %>
+      </div>
+
+
+      <%= form.submit "ViewErrorReportedLogs" ,{class: "btn btn-primary"} %>
+    </div>
+  <% end %>
+
+<!--
+  <td><%#= link_to 'viewlogs', '/viewlogs'  %></td>
+-->
+
   <td><%= link_to 'Back', adminpage_path  %></td>
   <br>
 
