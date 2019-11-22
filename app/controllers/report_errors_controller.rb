@@ -1,4 +1,7 @@
 require 'my_logger'
+require 'simple_writer'
+require 'numbering_writer'
+
 class ReportErrorsController < ApplicationController
   before_action :set_report_error, only: [:show, :edit, :update, :destroy]
 
@@ -22,6 +25,28 @@ class ReportErrorsController < ApplicationController
   def edit
   end
 
+  def numberedlog
+    numberedline = NumberingWriter.new(SimpleWriter.new('ReportedErrorsLog.txt'))
+    File.open("mylog.txt",'r') do |fileb|
+      while line = fileb.gets
+        numberedline.write_line line
+      end
+    end
+    numberedline.close
+  end
+
+  def viewlogs
+    linenumber_check = params[:linenumber_check]
+    puts "valllllllllll#{linenumber_check}"
+
+    numberedlog
+    send_file(
+        "#{Rails.root}/ReportedErrorsLog.txt",
+        filename: "ReportedErrorsLog.txt",
+        type: "txt",
+    disposition: 'attachment'
+    )
+  end
   # POST /report_errors
   # POST /report_errors.json
   def create
@@ -40,7 +65,7 @@ class ReportErrorsController < ApplicationController
 
         #changed
         #notify_observers(self, @report_error)
-        format.html { redirect_to root_path, notice: 'An Email was sent to the assigned user for the reported error.' }
+        format.html { redirect_to root_path, notice: 'Report error was successfully created.' }
         format.json { render :show, status: :created, location: @report_error }
       else
         format.html { render :new }

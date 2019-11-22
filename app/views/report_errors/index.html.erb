@@ -24,9 +24,15 @@
     <% end %>
   </tbody>
 </table>
-  <td><%= link_to 'ViewLogs'  %></td>
-
-<br>
+  <div class="field">
+    Please check below box if you want to include line number to the log file:
+    <br>
+    <%= check_box_tag 'Include Line Number', 'linenumber_check' %>
+  </div>
+  <td><%= link_to 'ViewLogs', 'viewlogs'  %></td>
+  <br>
+  <td><%= link_to 'Back', adminpage_path  %></td>
+  <br>
 
 
   <% else %>

@@ -8,13 +8,7 @@ class ReportErrorObserver < ActiveRecord::Observer
 
     ReporterrorMailer.with(report_error: record).new_report_error_email.deliver_later
 # use the MyLogger instance method to retrieve the single instance/object of the class
-    @logger = MyLogger.instance
-# use the logger to log/record a message about the updated car
-    @logger.logInformation("###############Observer Demo:#")
-    @logger.logInformation("Error Reported
-#{record.errormessage}
-has been assigned to #{record.user_id}")
-    @logger.logInformation("##############################")
+
   end
 end
 
