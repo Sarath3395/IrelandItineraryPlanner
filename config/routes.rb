@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   post 'toprated' => 'toprated#index'
 
   get 'viewlogs' => 'report_errors#viewlogs'
+  post 'viewlogs' => 'report_errors#viewlogs'
 
   get 'new_report_error_path' => 'report_errors#new'
 

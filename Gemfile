@@ -13,7 +13,7 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
 
 gem 'favoriteshandler'
-
+gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
 

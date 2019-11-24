@@ -43,7 +43,10 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to restaurant.name , restaurant %></h5>
             <p class="card-text"><%= restaurant.location.name %></p>
-            <p class="card-text"><%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => restaurant.id }%></p>
+            <a href="/like?restaurant_id=<%=restaurant.id %>>&amp;method=post" >
+              <svg class="bk-icon -iconset-heart saved_state" color="#FF6C6C" fill="#FF6C6C" height="16" width="16" viewBox="0 0 128 128" role="presentation" aria-hidden="true"><path d="M64 112a3.6 3.6 0 0 1-2-.5 138.8 138.8 0 0 1-44.2-38c-10-14.4-10.6-26-9.4-33.2a29 29 0 0 1 22.9-23.7c11.9-2.4 24 2.5 32.7 13a33.7 33.7 0 0 1 32.7-13 29 29 0 0 1 22.8 23.7c1.3 7.2.6 18.8-9.3 33.3-9.1 13.1-24 25.9-44.2 37.9a3.6 3.6 0 0 1-2 .5z"></path></svg>
+            </a>
+            <%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :restaurant_id => restaurant.id }%>
           </div>
           <ul class="list-group list-group-flush">
           </ul>
@@ -71,7 +74,10 @@
           <div class="card-body">
             <h5 class="card-title"><%= link_to transport.name , transport %></h5>
             <p class="card-text"><%= transport.transporttype %></p>
-            <p class="card-text"><%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :transport_id => transport.id }%></p>
+            <a href="/like?transport_id=<%=transport.id %>>&amp;method=post" >
+              <svg class="bk-icon -iconset-heart saved_state" color="#FF6C6C" fill="#FF6C6C" height="16" width="16" viewBox="0 0 128 128" role="presentation" aria-hidden="true"><path d="M64 112a3.6 3.6 0 0 1-2-.5 138.8 138.8 0 0 1-44.2-38c-10-14.4-10.6-26-9.4-33.2a29 29 0 0 1 22.9-23.7c11.9-2.4 24 2.5 32.7 13a33.7 33.7 0 0 1 32.7-13 29 29 0 0 1 22.8 23.7c1.3 7.2.6 18.8-9.3 33.3-9.1 13.1-24 25.9-44.2 37.9a3.6 3.6 0 0 1-2 .5z"></path></svg>
+            </a>
+            <%= link_to "Remove favorite", {:controller => "like", :action => "index", method: :post, :transport_id => transport.id }%>
           </div>
           <ul class="list-group list-group-flush">
           </ul>

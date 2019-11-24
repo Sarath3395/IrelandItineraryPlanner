@@ -1,9 +1,5 @@
 
-
-
 $(document).ready(function() {
-
-
 
    $(".pricediv").slideDown(100);
 
@@ -143,6 +139,8 @@ $(document).ready(function() {
         }
 
     });
+
+
 
 });
 

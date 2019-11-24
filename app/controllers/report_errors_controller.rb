@@ -1,6 +1,8 @@
 require 'my_logger'
 require 'simple_writer'
 require 'numbering_writer'
+require 'report_error_result_generator'
+require 'document_type'
 
 class ReportErrorsController < ApplicationController
   before_action :set_report_error, only: [:show, :edit, :update, :destroy]
@@ -35,17 +37,69 @@ class ReportErrorsController < ApplicationController
     numberedline.close
   end
 
-  def viewlogs
-    linenumber_check = params[:linenumber_check]
-    puts "valllllllllll#{linenumber_check}"
-
-    numberedlog
+  def sendtextfile
     send_file(
         "#{Rails.root}/ReportedErrorsLog.txt",
         filename: "ReportedErrorsLog.txt",
         type: "txt",
-    disposition: 'attachment'
+        disposition: 'inline'
     )
+  end
+
+  def viewlogs
+
+
+    if params[:commit] == 'ViewErrorReportedLogs'
+
+      if params[:linenumber_check].to_s.length > 0 then
+        if(params[:viewlogs][:viewtype] == "pdf")
+          numberedlog
+          pdf = Prawn::Document.new
+          File.open("ReportedErrorsLog.txt",'r') do |fileb|
+            while line = fileb.gets
+              pdf.text "#{line}"
+            end
+          end
+
+          send_data pdf.render, filename: "ReportedErrorsLog",
+                    type: "application/pdf",
+                    disposition: "inline"
+
+        else
+          #numberedlog
+          generatereport = ReportErrorResultGenerator.new(NumberedTextReport.new)
+          generatereport.reporting
+          sendtextfile
+        end
+        #numberedlog
+
+      else
+
+        if(params[:viewlogs][:viewtype] == "pdf")
+
+          pdf = Prawn::Document.new
+          File.open("mylog.txt",'r') do |fileb|
+            while line = fileb.gets
+              pdf.text "#{line}"
+            end
+          end
+
+          send_data pdf.render, filename: "ReportedErrorsLog",
+                    type: "application/pdf",
+                    disposition: "inline"
+
+        else
+
+          generatereport = ReportErrorResultGenerator.new(TextReport.new)
+          generatereport.reporting
+          sendtextfile
+
+        end
+
+      end
+
+    end
+
   end
   # POST /report_errors
   # POST /report_errors.json
@@ -60,7 +114,7 @@ class ReportErrorsController < ApplicationController
       if @report_error.save
         # retrieve the instance/object of the MyLogger class
         logger = MyLogger.instance
-        logger.logInformation("An error is with the error message: " + @report_error.errormessage)
+        logger.logInformation("#{Time.now} An error is reported by user_id: #{current_user.id} with the error message: #{@report_error.errormessage} and assigned to: #{@report_error.user_id}")
         #add_observer(ErrorObserver.new)
 
         #changed
@@ -99,13 +153,13 @@ class ReportErrorsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_report_error
-      @report_error = ReportError.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_report_error
+    @report_error = ReportError.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def report_error_params
-      params.require(:report_error).permit(:errormessage)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def report_error_params
+    params.require(:report_error).permit(:errormessage)
+  end
 end
