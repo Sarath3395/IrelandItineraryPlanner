@@ -132,15 +132,17 @@ class WelcomeController < ApplicationController
 
 			if (hotelnotexst == true)
 				puts "he did not have fav"
-				#hoteltopratedfilter
+				hoteltopratedfilter
 				@hotelrecommendationtype = "Recommended Hotels for You Based on MostFavorites"
 				@recommendedhotels = @recommendedhotelsbytop
 
+=begin
 				@recommendedhotels = Hash.new(0)
 				@recommendedhotels = RecommendationResultGenerator.new(RecommendationByMostLiked.new)
 				@recommendedhotels.RecommendationResult(@recommendedhotelsbytop)
 				puts"llllllllllllllllllll"
 				puts @recommendedhotels
+=end
 
 			else
 				puts "he has favorites"
