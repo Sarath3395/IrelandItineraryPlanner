@@ -33,10 +33,12 @@
         Include Line Number:
         <%= check_box_tag 'linenumber_check', 'linenumber_check' %>
       </div>
+
       Select view type
       <%= form.select :viewtype, [['Text','text'],['PDF','pdf']] %>
       <br>
 <br>
+
 
 
       <%= form.submit "ViewErrorReportedLogs" ,{class: "btn btn-primary"} %>

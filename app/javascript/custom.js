@@ -1,6 +1,7 @@
 
 $(document).ready(function() {
 
+
    $(".pricediv").slideDown(100);
 
    $("#searchtype").on('change',function(){
