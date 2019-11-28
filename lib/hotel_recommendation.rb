@@ -1,4 +1,4 @@
-class HotelRecommendation
+class HotelRecommendation <  ApplicationController
   def type(userid)
     raise NotImplementedError, 'Ask the subclass'
   end
@@ -7,6 +7,8 @@ end
 class RecommendationByCollab < HotelRecommendation
   def type(userid)
     userid
+    puts "lllllllllllllllllllllllllllllllllllllllllllllll"
+    puts "#{User.all}"
     #hotelcollaborativefilter
   end
 end

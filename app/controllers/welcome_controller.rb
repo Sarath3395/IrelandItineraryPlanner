@@ -1,5 +1,7 @@
-require 'hotel_recommendation'
-require 'recommendation_result_generator'
+=begin
+require_relative 'hotel_recommendation'
+require_relative 'recommendation_result_generator'
+=end
 
 class WelcomeController < ApplicationController
 	def hotelcollabfilter
@@ -138,8 +140,8 @@ class WelcomeController < ApplicationController
 
 =begin
 				@recommendedhotels = Hash.new(0)
-				@recommendedhotels = RecommendationResultGenerator.new(RecommendationByMostLiked.new)
-				@recommendedhotels.RecommendationResult(@recommendedhotelsbytop)
+				res = RecommendationResultGenerator.new(RecommendationByCollab.new)
+				res.recommendresult("test")
 				puts"llllllllllllllllllll"
 				puts @recommendedhotels
 =end

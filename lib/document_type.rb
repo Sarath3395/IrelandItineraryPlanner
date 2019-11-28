@@ -6,6 +6,7 @@ class DocumentType < ApplicationController
   end
 
   def numberedlog
+
     numberedline = NumberingWriter.new(SimpleWriter.new('ReportedErrorsLog.txt'))
     File.open("mylog.txt",'r') do |fileb|
       while line = fileb.gets
