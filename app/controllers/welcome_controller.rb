@@ -1,126 +1,9 @@
-=begin
-require_relative 'hotel_recommendation'
-require_relative 'recommendation_result_generator'
-=end
+
+require 'it_planner_recommendation'
+require 'recommendation_result_generator'
+
 
 class WelcomeController < ApplicationController
-	def hotelcollabfilter
-		id = current_user.id
-		@user = User.find(id)
-		@user = User.find_by_id(current_user.id)
-		@recommendedhotelsbycollab = Hash.new(0)
-		collab = @user.recommend_hotels
-		i =0
-		collab.each do|key, value|
-
-			if(i<6)
-				@recommendedhotelsbycollab[key] = value
-				i=i+1
-			end
-		end
-	end
-	def hoteltopratedfilter
-		@recommendedhotelsbytop = Hash.new(0)
-		@hotels = Hash.new(0)
-		liked = LikedHotel.group(:hotel_id).count
-		sortedlike = liked.sort_by{|key,value| value}.reverse
-		sortedlike.each do|res|
-			@hotels[Hotel.find_by_id(res[0])] = res[1]
-		end
-		toprated = @hotels
-		t=0
-		toprated.each do |key, value|
-
-			if (t <6)
-
-				exst = LikedHotel.where(hotel_id: key.id, user_id: current_user.id)
-				if(exst == [])
-					@recommendedhotelsbytop[key] = value
-					t=t+1
-				end
-
-			end
-		end
-	end
-	def rescollabfilter
-		id = current_user.id
-		@user = User.find(id)
-		@user = User.find_by_id(current_user.id)
-		@recommendedrestaurantsbycollab = Hash.new(0)
-		collab = @user.recommend_restaurants
-		i =0
-		collab.each do|key, value|
-
-			if(i<6)
-				@recommendedrestaurantsbycollab[key] = value
-				i=i+1
-			end
-		end
-	end
-	def restopratedfilter
-		@recommendedrestaurantsbytop = Hash.new(0)
-		@restaurants = Hash.new(0)
-		liked = LikedRestaurant.group(:restaurant_id).count
-		sortedlike = liked.sort_by{|key,value| value}.reverse
-		sortedlike.each do|res|
-			@restaurants[Restaurant.find_by_id(res[0])] = res[1]
-		end
-		toprated = @restaurants
-		i=0
-		toprated.each do |key, value|
-
-			if (i <6)
-
-
-				exst = LikedRestaurant.where(restaurant_id: key.id, user_id: current_user.id)
-				if(exst == [])
-					@recommendedrestaurantsbytop[key] = value
-					i=i+1
-				end
-
-			end
-		end
-
-	end
-
-	def transcollabfilter
-		id = current_user.id
-		@user = User.find(id)
-		@user = User.find_by_id(current_user.id)
-		@recommendedtrasnportsbycollab = Hash.new(0)
-		collab = @user.recommend_transports
-		i =0
-		collab.each do|key, value|
-
-			if(i<6)
-				@recommendedtrasnportsbycollab[key] = value
-				i=i+1
-			end
-		end
-	end
-
-	def transtopratedfilter
-		@recommendedtrasnportsbytop = Hash.new(0)
-		@transports = Hash.new(0)
-		liked = LikedTransport.group(:transport_id).count
-		sortedlike = liked.sort_by{|key,value| value}.reverse
-		sortedlike.each do|res|
-			@transports[Transport.find_by_id(res[0])] = res[1]
-		end
-		toprated = @transports
-		i=0
-		toprated.each do |key, value|
-
-			if (i <6)
-				exst = LikedTransport.where(transport_id: key.id, user_id: current_user.id)
-				if(exst == [])
-					@recommendedtrasnportsbytop[key] = value
-					i=i+1
-				end
-
-			end
-		end
-	end
 
 	def homepage
 		@hotels = Hotel.order("RANDOM()").limit(10)
@@ -134,45 +17,81 @@ class WelcomeController < ApplicationController
 
 			if (hotelnotexst == true)
 				puts "he did not have fav"
+=begin
 				hoteltopratedfilter
 				@hotelrecommendationtype = "Recommended Hotels for You Based on MostFavorites"
 				@recommendedhotels = @recommendedhotelsbytop
-
-=begin
-				@recommendedhotels = Hash.new(0)
-				res = RecommendationResultGenerator.new(RecommendationByCollab.new)
-				res.recommendresult("test")
-				puts"llllllllllllllllllll"
-				puts @recommendedhotels
 =end
 
+				#@recommendedhotels = Hash.new(0)
+				res = RecommendationResultGenerator.new(RecommendationByTopratedHotels.new)
+				res.recommendresult(current_user.id)
+				@hotelrecommendationtype = "Recommended Hotels for You Based on MostFavorites"
+				@recommendedhotels = res.it_planner_recommendation.type(current_user.id)
+
 			else
+=begin
 				puts "he has favorites"
 				hotelcollabfilter
 				@hotelrecommendationtype = "Recommended Hotels for You Based on Similarity with Other Users"
 				@recommendedhotels = @recommendedhotelsbycollab
+=end
+				#@recommendedhotels = Hash.new(0)
+				res = RecommendationResultGenerator.new(RecommendationByCollaborativeHotels.new)
+				res.recommendresult(current_user.id)
+				@hotelrecommendationtype = "Recommended Hotels for You Based on Similarity with Other Users"
+				@recommendedhotels = res.it_planner_recommendation.type(current_user.id)
+
+
       end
 
       if (resnotexst == true)
+=begin
         puts "he did not have fav"
         restopratedfilter
 				@restaurantrecommendationtype = "Recommended Restaurants for You Based on MostFavorites"
 				@recommendedrestaurants = @recommendedrestaurantsbytop
+=end
+				res = RecommendationResultGenerator.new(RecommendationByTopratedRestaurants.new)
+				res.recommendresult(current_user.id)
+				@restaurantrecommendationtype = "Recommended Restaurants for You Based on MostFavorites"
+				@recommendedrestaurants = res.it_planner_recommendation.type(current_user.id)
+
       else
+=begin
         puts "he has favorites"
         rescollabfilter
 				@restaurantrecommendationtype = "Recommended Restaurants for You Based on Similarity with Other Users"
 				@recommendedrestaurants = @recommendedrestaurantsbycollab
+=end
+
+				res = RecommendationResultGenerator.new(RecommendationByCollaborativeRestaurants.new)
+				res.recommendresult(current_user.id)
+				@restaurantrecommendationtype = "Recommended Restaurants for You Based on Similarity with Other Users"
+				@recommendedrestaurants = res.it_planner_recommendation.type(current_user.id)
+
 			end
 
 			if(transnotext == true)
+=begin
 				transtopratedfilter
 				@transportrecommendationtype = "Recommended Transports for You Based on MostFavorites"
 				@recommendedtransports = @recommendedtrasnportsbytop
+=end
+				res = RecommendationResultGenerator.new(RecommendationByTopratedTransports.new)
+				res.recommendresult(current_user.id)
+				@transportrecommendationtype = "Recommended Transports for You Based on MostFavorites"
+				@recommendedtransports = res.it_planner_recommendation.type(current_user.id)
 			else
+=begin
 				transcollabfilter
 				@transportrecommendationtype = "Recommended Transports for You Based on Similarity with Other Users"
 				@recommendedtransports = @recommendedtrasnportsbycollab
+=end
+				res = RecommendationResultGenerator.new(RecommendationByCollaborativeTransports.new)
+				res.recommendresult(current_user.id)
+				@transportrecommendationtype = "Recommended Transports for You Based on Similarity with Other Users"
+				@recommendedtransports = res.it_planner_recommendation.type(current_user.id)
 			end
 
 		end

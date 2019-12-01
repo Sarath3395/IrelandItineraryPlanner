@@ -1,9 +1,9 @@
 class RecommendationResultGenerator < ApplicationController
-  attr_accessor :hotel_recommendation
-  def initialize hotel_recommendation
-    @hotel_recommendation = hotel_recommendation
+  attr_accessor :it_planner_recommendation
+  def initialize it_planner_recommendation
+    @it_planner_recommendation = it_planner_recommendation
   end
   def recommendresult(userid)
-     hotel_recommendation.type(userid)
+    it_planner_recommendation.type(userid)
   end
 end

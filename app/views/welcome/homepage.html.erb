@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
 <%=@recommendation_result %>
-  <% if @recommendedhotels == {} %>
+  <% if @recommendedhotels == [] %>
     <h2>Recommendation For Hotel is Not Available.</h2>
     (Please add some favorites or All the Recommendations are added to favorites)
 
@@ -9,9 +9,10 @@
     <table><h2><%= @hotelrecommendationtype %></h2>
 
       <div class="row">
-
+      <% i=0 %>
         <% @recommendedhotels.each do |key, value| -%>
-
+            <% if (i < 6) %>
+              <% i=i+1 %>
           <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
@@ -42,15 +43,16 @@
             </div>
           </div>
         <% end %>
+        <% end %>
+
         <br>
       </div>
-
 
     </table>
 
   <% end %>
 
-  <% if (@recommendedrestaurants) == {}  %>
+  <% if (@recommendedrestaurants) == []  %>
 
     <h2>Recommendation for restaurant in not available</h2>
     (please add some restaurants to favorite or all the recommendation are added to favorites)
@@ -61,8 +63,10 @@
 
 
     <div class="row">
+      <% i=0 %>
       <% @recommendedrestaurants.each do |key, value| -%>
-
+        <% if (i < 6) %>
+          <% i=i+1 %>
         <div class="col-sm-4">
           <div class="card">
             <div class="card-body">
@@ -91,6 +95,7 @@
           </div>
         </div>
       <% end %>
+        <% end %>
       <br>
     </div>
 
@@ -99,7 +104,7 @@
   <% end %>
 
 
-  <% if  (@recommendedtransports == {}) %>
+  <% if  (@recommendedtransports == []) %>
 
     <h2>Recommendation for Transport is not available.</h2>
     (please add some transport to favorite or all the recommendation are added to favorites)
@@ -110,9 +115,10 @@
     <table><h2><%= @transportrecommendationtype %></h2>
 
       <div class="row">
-
+        <% i=0 %>
         <% @recommendedtransports.each do |key, value| -%>
-
+          <% if (i < 6) %>
+            <% i=i+1 %>
           <div class="col-sm-4">
             <div class="card">
               <div class="card-body">
@@ -139,7 +145,7 @@
             </div>
           </div>
         <% end %>
-
+        <% end %>
         <br>
       </div>
 

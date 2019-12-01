@@ -4,7 +4,9 @@ class SearchController < ApplicationController
 
   def searchmethod
 
-    searchtype = params[:search][:searchtype]
+    if (params[:commit] == 'Search' && (params[:search][:fromdate].length != 0 && params[:search][:todate].length != 0))
+
+      searchtype = params[:search][:searchtype]
 
     puts '-----------------------------------'
     if(searchtype.eql? "searchbyprice")
@@ -16,6 +18,10 @@ class SearchController < ApplicationController
       self.searchbylocation
 
     end
+    else
+      redirect_to root_path
+    end
+
 
   end
   def searchbylocation
