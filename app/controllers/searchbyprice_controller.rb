@@ -377,11 +377,11 @@ indexofarray= indexofarray.to_i
         elsif((val["range"].include? "4") || (val["range"].include? "5"))
             val.store("economy", "expensive")
         end
-        if !val["name"]
-          val["name"]="NA"
+        if val["name"]
+          @scrappedrestaurant << val
         end  
             
-    @scrappedrestaurant << val
+    
     end
 
         @likedrestaurant=[]

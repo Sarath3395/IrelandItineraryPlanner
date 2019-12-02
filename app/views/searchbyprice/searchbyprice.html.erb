@@ -202,7 +202,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <%= form.submit "Submit" ,{class: "btn btn-primary",id: "submitbutton"} %>
+            <%= form.submit "Submit" ,{class: "btn btn-primary",id: "submitbutton", data: {disable_with: "Loading..."}} %>
       </div>
       <%= form.text_field :indexofarray, {id: "modal-index", style: "display:none;"}  %>
       <%= form.text_field :destination, {id: "modal-destination", style: "display:none;"}  %>

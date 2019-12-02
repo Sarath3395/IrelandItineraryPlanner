@@ -40,6 +40,7 @@
  <div class="border border-primary rounded p-3">
   <h4>Transport Details</h4>
     <% @resultTransport.each_with_index do |temp,index| -%>
+ <% if index != 0 %><br><% end -%>
         <div class="card border border-success">
           <div class="card-body">
             <h5 class="card-title">Expressway</h5>
@@ -57,10 +58,9 @@
 
           </div>
         </div>
-         <br>
+       
     <% end -%>
-    <br>
-  
+
 </div>
 
 
@@ -75,7 +75,7 @@
   <h4>Restaurant Details</h4>
   
     <% @resultRestaurant.each_with_index do |temp,index| -%>
-      
+          <% if index != 0 %><br><% end -%>
         <div class="card border border-success">
           <div class="card-body">
             <h5 class="card-title"><%= temp.name %></h5>
@@ -92,9 +92,9 @@
 
           </div>
         </div>
-       <br>
+       
     <% end -%>
-    <br>
+    
   
 </div>
 
