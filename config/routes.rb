@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+root 'welcome#homepage'
   resources :report_errors
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   resources :liked_locations
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
   resources :locations
 
   post '/search' => 'search#searchmethod'
+
   get '/adminpage' => 'admin#adminhome'
   post '/adminpage' => 'admin#adminhome'
 
@@ -25,6 +28,14 @@ Rails.application.routes.draw do
 
 
   get 'new_report_error_path' => 'report_errors#new'
+ get '/searchbyprice' => 'searchbyprice#searchbyprice'
+ post '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
+ get '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
+
+  post '/userpreference' => 'searchbyprice#userpreference'
+ get '/userpreference' => 'searchbyprice#userpreference'
+ 
+  
 
 
 
@@ -34,6 +45,6 @@ Rails.application.routes.draw do
 
   end
 
-  root 'welcome#homepage'
+  
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
