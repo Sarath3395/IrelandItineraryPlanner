@@ -12,8 +12,6 @@ class SearchbyPlace < SearchResult
     puts "innnnnnnnnnnnnnnnnnnnn"
     result = BookingScrapper.scrape(finalurl)
 
-
-
     #puts @scrappedHotels
     @scrappedHotels = []
     result.each_with_index do |val, index|

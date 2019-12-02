@@ -3,4 +3,6 @@ class Hotel < ApplicationRecord
 
   has_many :liked_hotels
   has_many :users, through: :liked_hotels
+
+  
 end

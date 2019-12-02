@@ -1,0 +1,212 @@
+
+
+<table><h2>Search Results</h2>
+  <h5><%= @searchresultsstr %> </h5>
+
+  <% if @dublinhotels != [] %>
+  <div class="border border-primary rounded p-3">
+  <h4>Dublin Hotels</h4>
+  <div class="row">
+    <% @dublinhotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item">€ <%= temp["price"] %></li>
+
+          </ul>
+          <div class="card-body">
+
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+
+
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+<% if @corkhotels != [] %>
+<div class="border border-primary rounded p-3">
+    <h4>Cork Hotels</h4>
+  <div class="row">
+    <% @corkhotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+
+          </ul>
+          <div class="card-body">
+            <!--<a href="#" class="btn btn-primary">Search</a> -->
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+<% if @galwayhotels != [] %>
+  <div class="border border-primary rounded p-3">
+      <h4>Galway Hotels</h4>
+  <div class="row">
+    <% @galwayhotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+
+<% if @limerickhotels != [] %>
+  <div class="border border-primary rounded p-3">
+      <h4>Limerick Hotels</h4>
+  <div class="row">
+    <% @limerickhotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+<% if @belfasthotels != [] %>
+  <div class="border border-primary rounded p-3">
+      <h4>Belfast Hotels</h4>
+  <div class="row">
+    <% @belfasthotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+<% if @newryhotels != [] %>
+  <div class="border border-primary rounded p-3">
+      <h4>Newry Hotels</h4>
+  <div class="row">
+    <% @newryhotels.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+   
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Transport and Restaurant
+          </button>
+          </div>
+
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="exampleModalLongTitle">Where your Trip starts?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <%= form_for :search, url: searchtransportrestaurant_path  do |form| %>
+      <div class="modal-body">
+        <div class="form-group">
+        <label class="font-weight-bold" for="place">Places</label>
+        <%= form.select :origin, options_for_select( (Location.all).collect { |location| [location.name, location.id] } ) , {},:class => "form-control", :id => "modalplace" %>
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= form.submit "Submit" ,{class: "btn btn-primary",id: "submitbutton"} %>
+      </div>
+      <%= form.text_field :indexofarray, {id: "modal-index", style: "display:none;"}  %>
+      <%= form.text_field :destination, {id: "modal-destination", style: "display:none;"}  %>
+    <% end  %>
+    </div>
+  </div>
+</div>

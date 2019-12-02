@@ -1,0 +1,2 @@
+module SearchByPriceHelper
+end

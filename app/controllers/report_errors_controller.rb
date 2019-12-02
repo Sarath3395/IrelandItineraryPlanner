@@ -221,3 +221,4 @@ class ReportErrorsController < ApplicationController
     params.require(:report_error).permit(:errormessage)
   end
 end
+end

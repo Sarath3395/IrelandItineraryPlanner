@@ -1,0 +1,117 @@
+<table>
+   <%= form_for :prefer, url: userpreference_path  do |form| %>
+
+  <div class="row">
+    <div class="col-sm-6">
+  <h2>Search Results</h2> 
+  </div>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-2"> 
+    <%= form.submit "Submit Preference" ,{class: "btn btn-primary",id: "submitbutton"} %>
+</div>
+</div>
+  
+    <p><%= form.text_field :hotel, {:value => @hotel, :style => "display:none;"} %></p>
+  <div class="row">
+<div class="col-sm-6">
+  <% if @scrappedoutwardtransport != [] %>
+  <div class="border border-primary rounded p-3">
+  <h4>Outbound trip</h4>
+  <div class="row">
+    <% @scrappedoutwardtransport.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title">Expressway</h5>
+            <p class="card-text"><%= temp["route"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Depart :<%= temp["depart"] %></li>
+            <li class="list-group-item">Arrival :<%= temp["arrival"] %></li>
+            <li class="list-group-item">Category :<%= temp["when"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+
+          </ul>
+          <div class="card-body">
+            <label>
+            <%= check_box_tag 'checkedtransout[]', temp%>
+            <span>Check it as your preference</span>
+          </label>
+
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+  <% if @scrappedinwardtransport != [] %>
+  <div class="border border-primary rounded p-3">
+  <h4>Inbound trip</h4>
+  <div class="row">
+    <% @scrappedinwardtransport.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title">Expressway</h5>
+            <p class="card-text"><%= temp["route"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Depart :<%= temp["depart"] %></li>
+            <li class="list-group-item">Arrival :<%= temp["arrival"] %></li>
+            <li class="list-group-item">Category :<%= temp["when"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+            <label>
+            <%= check_box_tag 'checkedtransin[]', temp%>
+            <span>Check it as your preference</span>
+          </label>
+
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+</div>
+
+<div class="col-sm-6">
+  
+ <% if @scrappedrestaurant != [] %>
+  <div class="border border-primary rounded p-3">
+  <h4>Restaurants</h4>
+  <div class="row">
+    <% @scrappedrestaurant.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["type"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Category :<%= temp["economy"] %></li>
+          </ul>
+          <div class="card-body">
+            <label>
+            <%= check_box_tag 'checkedres[]', temp%>
+            <span>Check it as your preference</span>
+          </label>
+
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+</div>
+</div>
+<% end  %>
+</table>

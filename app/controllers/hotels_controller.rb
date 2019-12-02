@@ -1,4 +1,7 @@
 class HotelsController < ApplicationController
+
+  attr_accessor :price
+  
   before_action :set_hotel, only: [:show, :edit, :update, :destroy]
 
   # GET /hotels

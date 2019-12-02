@@ -1,9 +1,28 @@
 <table><h2>Search Results</h2>
   <h5><%= @searchresultsstr %> </h5>
-<div class="row">
-  <%= @scrappedHotels%>
-<br>
-</div>
+  <div class="row">
+    <% @scrappedHotels.each do |temp| -%>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["address"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Rank :<%= temp["rank"] %></li>
+            <li class="list-group-item">Room Type :<%= temp["roomtype"] %></li>
+            <li class="list-group-item"><%= temp["price"] %></li>
+          </ul>
+          <div class="card-body">
+            <!--<a href="#" class="btn btn-primary">Search</a> -->
+          </div>
+        </div>
+      </div>
+
+    <% end -%>
+    <br>
+  </div>
 </table>
 
 

@@ -1,0 +1,108 @@
+<div class="row">
+	<div class="col-sm-12">
+		
+		<h4>Total cost : € <%= @price %></h4>
+		<p>included food prices based on restaurant(appox)</p>
+	</div>
+
+
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+
+<div class="border border-primary rounded p-3">
+<h4>Hotel details</h4>
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= @resultHotel.name %></h5>
+            <p class="card-text"><%= @resultHotel.address %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">From :<%= @fromdate %></li>
+            <li class="list-group-item">To :<%= @todate %></li>
+            <li class="list-group-item">For <%= @noofpersons %> person(s)</li>
+
+          </ul>
+          <div class="card-body">
+            <label>Price : €
+        	 <%= @resultHotel.price %>
+          </label>
+          </div>
+        </div>
+  
+</div>
+
+</div>
+
+<div class="col-sm-4">
+	
+ <div class="border border-primary rounded p-3">
+  <h4>Transport Details</h4>
+    <% @resultTransport.each_with_index do |temp,index| -%>
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title">Expressway</h5>
+            <p class="card-text"><%= temp.origin%> to <%= temp.destination %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Depart :<%= temp.departure %></li>
+            <li class="list-group-item">Arrival :<%= temp.arrival %></li>
+            <li class="list-group-item">Category :<%= temp.transporttype %></li>
+          </ul>
+          <div class="card-body">
+            <label>Price : €
+        	 <%= temp.price %>
+          </label>
+
+          </div>
+        </div>
+         <br>
+    <% end -%>
+    <br>
+  
+</div>
+
+
+
+
+
+</div>
+
+<div class="col-sm-4">
+
+ <div class="border border-primary rounded p-3">
+  <h4>Restaurant Details</h4>
+  
+    <% @resultRestaurant.each_with_index do |temp,index| -%>
+      
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp.name %></h5>
+            <p class="card-text"><%= temp.foodtype%> </p>
+          </div>
+          <ul class="list-group list-group-flush">
+           
+          </ul>
+          <div class="card-body">
+            <label>
+        	 <%= temp.price %>
+          </label>
+        
+
+          </div>
+        </div>
+       <br>
+    <% end -%>
+    <br>
+  
+</div>
+
+
+
+</div>
+
+
+
+
+</div>	

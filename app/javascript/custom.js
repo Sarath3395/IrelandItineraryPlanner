@@ -2,6 +2,40 @@
 $(document).ready(function() {
 
 
+
+var ATTRIBUTES = ['index', 'destination'];
+
+$('[data-toggle="modal"]').on('click', function (e) {
+  var $target = $(e.target);
+  var modalSelector = $target.data('target');
+  ATTRIBUTES.forEach(function (attributeName) {
+    var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
+    var dataValue = $target.data(attributeName);
+    var s = document.getElementById('modal-'+attributeName);
+    s.value = dataValue;
+
+    $modalAttribute.text(dataValue || '');
+    });
+  var s = document.getElementById('modal-destination').value;
+
+var select=document.getElementById('modalplace');
+
+for (i=0;i<select.length;  i++) {
+     select.options[i].disabled = false ;
+}
+for (i=0;i<select.length;  i++) {
+   if (select.options[i].value==s) {
+     select.options[i].disabled = true ;
+     if(i<select.length){
+     select.options[i+1].selected = 'selected';
+    }
+    else{
+       select.options[0].selected = 'selected'; 
+    }
+   }
+}
+    });
+
    $(".pricediv").slideDown(100);
 
    $("#searchtype").on('change',function(){
@@ -144,6 +178,7 @@ $(document).ready(function() {
 
 
 });
+
 
 
 
