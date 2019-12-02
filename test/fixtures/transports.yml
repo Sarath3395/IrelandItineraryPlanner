@@ -2,7 +2,7 @@
 
 one:
   name: MyString
-  type: 
+  transporttype: MyString
   origin: MyString
   destination: MyString
   departure: 2019-10-29 16:14:13
@@ -12,7 +12,7 @@ one:
 
 two:
   name: MyString
-  type: 
+  transporttype: MyString
   origin: MyString
   destination: MyString
   departure: 2019-10-29 16:14:13

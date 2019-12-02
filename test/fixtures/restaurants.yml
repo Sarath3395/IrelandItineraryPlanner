@@ -2,12 +2,12 @@
 
 one:
   name: MyString
-  type: 
+  foodtype: MyString
   price: MyString
   location: one
 
 two:
   name: MyString
-  type: 
+  foodtype: MyString
   price: MyString
   location: two
