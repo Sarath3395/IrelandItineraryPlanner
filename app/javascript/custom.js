@@ -2,12 +2,14 @@
 $(document).ready(function() {
 
 
+
     $("#submitbutton").click(function() {
         this.submit();
 
 
 
     });
+
 
    $(".pricediv").slideDown(100);
 

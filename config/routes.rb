@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   get 'viewlogs' => 'report_errors#viewlogs'
   post 'viewlogs' => 'report_errors#viewlogs'
 
+
   get 'new_report_error_path' => 'report_errors#new'
+
+
+
 
 
   devise_for :users, :controllers => {:omniauth_callbacks => "callbacks",registrations: 'users/registrations', sessions: "users/sessions"} do
