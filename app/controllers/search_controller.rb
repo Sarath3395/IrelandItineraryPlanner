@@ -1,11 +1,11 @@
 require 'bookingscrapper'
-require 'search_result'
-require 'search_result_generator'
 
 
 class SearchController < ApplicationController
 
   def searchmethod
+
+    if (params[:commit] == 'Search' && (params[:search][:fromdate].length != 0 && params[:search][:todate].length != 0))
 
   search_form = Hash.new
   search_form.store("fromdate", params[:search][:fromdate])
@@ -16,9 +16,9 @@ class SearchController < ApplicationController
   search_form.store("price", params[:search][:price])
   search_form.store("place", params[:search][:place])
   
+    
+      searchtype = params[:search][:searchtype]
 
-    searchtype = params[:search][:searchtype]
-    #self.searchTransport
 
     if(searchtype.eql? "searchbyprice")
       puts "Print inside search by price controller"
@@ -32,6 +32,12 @@ class SearchController < ApplicationController
       self.searchbylocation
 
     end
+
+    else
+      redirect_to root_path
+    end
+
+
   end
   def searchbylocation
 
@@ -65,15 +71,40 @@ class SearchController < ApplicationController
 
     finalurl = defaultUrl+str1+str2+str3+str4+str5+str6+str7+str8+str9+str10+str11+str12+str13+str14+str15+str16+str17
 
-    result = SearchResultGenerator.new(SearchbyPlace.new)
-    result.resgen(finalurl)
+    result = BookingScrapper.scrape(finalurl)
 
 
-    puts "ressssssssssssssssssssssssss"
 
-    @scrappedHotels = result
+    #puts @scrappedHotels
+    @scrappedHotels = []
+    result.each_with_index do |val, index|
+
+      if( val["rank"] == nil)
+        val["rank"] = "NA"
+      end
+      if(val["roomtype"] ==nil)
+        val["roomtype"] = "NA"
+      end
+      if(val["price"] ==nil)
+        val["price"]= "SOLD OUT"
+      else
+        temp= val["price"]
+        val["price"]= "Price: € #{temp}"
+      end
+      if(val["bedtype"]==nil)
+        val["bedtype"] = "NA"
+      end
+
+      val.store("location_id", Location.find_by_scrapper_id(location_scrapperid).id)
+      puts"sssssssssssssssssssssssssssssssssssss"
+      puts val["location_id"]
+      @scrappedHotels << val
+
+      #puts "#{val} => #{index}"
+    end
+
     puts @scrappedHotels
-    #updatehotelstable
+    updatehotelstable
   end
 
   

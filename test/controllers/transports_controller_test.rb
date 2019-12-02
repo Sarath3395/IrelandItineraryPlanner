@@ -17,7 +17,7 @@ class TransportsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create transport" do
     assert_difference('Transport.count') do
-      post transports_url, params: { transport: { arrival: @transport.arrival, departure: @transport.departure, destination: @transport.destination, location_id: @transport.location_id, name: @transport.name, origin: @transport.origin, price: @transport.price, type: @transport.type } }
+      post transports_url, params: { transport: { arrival: @transport.arrival, departure: @transport.departure, destination: @transport.destination, location_id: @transport.location_id, name: @transport.name, origin: @transport.origin, price: @transport.price, transporttype: @transport.transporttype } }
     end
 
     assert_redirected_to transport_url(Transport.last)
@@ -34,7 +34,7 @@ class TransportsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update transport" do
-    patch transport_url(@transport), params: { transport: { arrival: @transport.arrival, departure: @transport.departure, destination: @transport.destination, location_id: @transport.location_id, name: @transport.name, origin: @transport.origin, price: @transport.price, type: @transport.type } }
+    patch transport_url(@transport), params: { transport: { arrival: @transport.arrival, departure: @transport.departure, destination: @transport.destination, location_id: @transport.location_id, name: @transport.name, origin: @transport.origin, price: @transport.price, transporttype: @transport.transporttype } }
     assert_redirected_to transport_url(@transport)
   end
 

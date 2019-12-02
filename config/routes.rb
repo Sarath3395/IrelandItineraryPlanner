@@ -11,7 +11,7 @@ root 'welcome#homepage'
   resources :liked_hotels
   resources :hotels
   resources :locations
-
+  get '/search' => 'search#searchmethod'
   post '/search' => 'search#searchmethod'
 
   get '/adminpage' => 'admin#adminhome'

@@ -2,7 +2,6 @@
 $(document).ready(function() {
 
 
-
 var ATTRIBUTES = ['index', 'destination'];
 
 $('[data-toggle="modal"]').on('click', function (e) {
@@ -35,6 +34,9 @@ for (i=0;i<select.length;  i++) {
    }
 }
     });
+
+
+
 
    $(".pricediv").slideDown(100);
 
