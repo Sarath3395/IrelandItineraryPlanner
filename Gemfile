@@ -16,7 +16,6 @@ gem 'favoriteshandler'
 gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
-gem 'win32console'
 gem 'rails-observers'
 group :development, :test do
 gem 'sqlite3'
@@ -80,6 +79,8 @@ group :test do
 end
 group :test do
   gem 'rails-controller-testing'
+  gem 'win32console'
+
 end
 
 # Heroku uses Heroku Postgres DB based on PostgreSQL
