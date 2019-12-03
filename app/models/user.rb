@@ -3,7 +3,7 @@ require 'recommendation'
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :lockable,
          :recoverable, :rememberable, :validatable, :omniauthable, :omniauth_providers => [:google_oauth2], password_length: 9..128
   has_many :liked_hotels
   has_many :hotels, through: :liked_hotels

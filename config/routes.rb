@@ -34,8 +34,8 @@ root 'welcome#homepage'
 
   post '/userpreference' => 'searchbyprice#userpreference'
  get '/userpreference' => 'searchbyprice#userpreference'
- 
-  
+
+
 
 
 

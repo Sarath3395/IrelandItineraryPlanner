@@ -1,2 +1,12 @@
 2019-11-24 19:39:24 +0000 An error is reported by user_id: 6 with the error message: dfsdfasdf and assigned to: 6
 2019-11-24 19:39:24 +0000 Email has sent regarding: dfsdfasdf to this email id: sarath.ravichandran@gmail.com
+2019-12-03 03:30:51 +0000 An error is reported by user_id: 1 with the error message: checking and assigned to: 1
+2019-12-03 03:30:51 +0000 Email has sent regarding: checking to this email id: sarath3395@gmail.com
+2019-12-03 04:30:42 +0000 An error is reported by user_id: number1 with the error message: checking name and assigned to: 1
+2019-12-03 04:30:42 +0000 Email has sent regarding: checking name to this email id: sarath3395@gmail.com
+2019-12-03 04:35:34 +0000 An error is reported by user_id: 2, user_name:  with the error message: hello working fine? and the error is assigned to user_id: 2, user_name: 2 
+2019-12-03 04:35:34 +0000 Email has sent regarding: hello working fine? to this email id: sarath.ravichandran@gmail.com
+2019-12-03 04:37:18 +0000 An error is reported by user_id: 2, user_name: SarathRavichandran with the error message: checking name and the error is assigned to user_id: 2, user_name: 2 
+2019-12-03 04:37:18 +0000 Email has sent regarding: checking name to this email id: sarath.ravichandran@gmail.com
+2019-12-03 20:42:18 +0000 An error is reported by user_id: 2, user_name: SarathRavichandran with the error message: checking name and the error is assigned to user_id: 2, user_name: SarathRavichandran 
+2019-12-03 20:42:18 +0000 Email has sent regarding: checking name to this email id: sarath.ravichandran@gmail.com

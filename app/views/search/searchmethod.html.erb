@@ -1,9 +1,15 @@
-<table><h2>Search Results</h2>
+<div><h2>Search Results</h2>
   <h5><%= @searchresultsstr %> </h5>
-  <div class="row">
+
+  <% if @scrappedHotels != [] %>
+
+  <h2> Hotels </h2>
+    <div class="border border-primary rounded p-3">
+    <div class="row">
     <% @scrappedHotels.each do |temp| -%>
 
       <div class="col-sm-4">
+        <div class="card border border-success">
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= temp["name"] %></h5>
@@ -19,10 +25,122 @@
           </div>
         </div>
       </div>
+      </div>
 
     <% end -%>
     <br>
   </div>
+  </div>
+  <%else %>
+  <h2> Currently No Hotels Available for the Selected Search Criteria</h2>
+  <% end %>
+
+
+  <% if @scrappedrestaurant != [] %>
+
+
+  <h2> Restaurants </h2>
+    <div class="border border-primary rounded p-3">
+    <div class="row">
+    <% @scrappedrestaurant.each do |temp| -%>
+
+      <div class="col-sm-4">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <% location =Location.find_by_id(temp["location_id"]) %>
+            <p class="card-text"><%= @restau.name %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Type :<%= temp["type"] %></li>
+
+          </ul>
+          <div class="card-body">
+            <!--<a href="#" class="btn btn-primary">Search</a> -->
+          </div>
+        </div>
+      </div>
+
+    <% end -%>
+    <br>
+  </div>
+  </div>
+  <%else %>
+  <h2> Currently No Restaurant Available for the Selected Search Criteria</h2>
+  <% end %>
+  <% if (@scrappedoutwardtransport == []) && (@scrappedinwardtransport ==[]) %>
+    <h2> Currently No Transport Available for the Selected Search Criteria</h2>
+  <%else %>
+
+<% if @scrappedinwardtransport != []%>
+    <h4>Transport InBound Details</h4>
+      <div class="border border-primary rounded p-3">
+
+    <div class="row">
+      <% @scrappedinwardtransport.each do |temp| -%>
+        <div class="col-sm-4 p-3">
+          <div class="card border border-success">
+            <div class="card-body">
+              <h5 class="card-title">Expressway</h5>
+              <p class="card-text">Route:<%= temp["route"] %></p>
+              <p class="card-text">From:<%= @originlocation.name %> To:<%= @destinationlocation.name %></p>
+
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Depart :<%= temp["depart"] %></li>
+              <li class="list-group-item">Arrival :<%= temp["arrival"] %></li>
+              <li class="list-group-item">Category :<%= temp["when"] %></li>
+              <li class="list-group-item"><%= temp["price"] %></li>
+
+            </ul>
+
+          </div>
+        </div>
+      <% end -%>
+      <br>
+    </div>
+    </div>
+      </div>
+      <% end %>
+
+
+    <% if @scrappedoutwardtransport != []%>
+      <h4>Transport OutBound Details</h4>
+
+      <div class="border border-primary rounded p-3">
+
+      <div class="row">
+        <% @scrappedoutwardtransport.each do |temp| -%>
+          <div class="col-sm-4 p-3">
+            <div class="card border border-success">
+              <div class="card-body">
+                <h5 class="card-title">Expressway</h5>
+                <p class="card-text">Route:<%= temp["route"] %></p>
+                <p class="card-text">From:<%= @originlocation.name %>To:<%= @destinationlocation.name %></p>
+
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Depart :<%= temp["depart"] %></li>
+                <li class="list-group-item">Arrival :<%= temp["arrival"] %></li>
+                <li class="list-group-item">Category :<%= temp["when"] %></li>
+                <li class="list-group-item"><%= temp["price"] %></li>
+
+              </ul>
+
+            </div>
+          </div>
+        <% end -%>
+        <br>
+      </div>
+      </div>
+    <% end %>
+
+
+
+
+
+  <% end %>
 </table>
 
 

@@ -44,64 +44,6 @@ class ReportErrorsController < ApplicationController
         type: "txt",
         disposition: 'inline'
     )
-  def viewlogs
-
-
-    if params[:commit] == 'ViewErrorReportedLogs'
-      if params[:linenumber_check].to_s.length > 0 then
-        numberedlog
-        send_file(
-            "#{Rails.root}/ReportedErrorsLog.txt",
-            filename: "ReportedErrorsLog.txt",
-            type: "txt",
-            disposition: 'attachment'
-            )
-      else
-        File.open("ReportedErrorsLog.txt",'w') do |filea|
-          File.open("mylog.txt",'r') do |fileb|
-            while line = fileb.gets
-              filea.puts line
-            end
-          end
-
-
-        end
-        send_file(
-            "#{Rails.root}/ReportedErrorsLog.txt",
-            filename: "ReportedErrorsLog.txt",
-            type: "txt",
-            disposition: 'attachment'
-        )
-      end
-    else
-      if params[:linenumber_check].to_s.length > 0 then
-        numberedlog
-        send_file(
-            "#{Rails.root}/ReportedErrorsLog.txt",
-            filename: "ReportedErrorsLog.txt",
-            type: "txt",
-            disposition: 'attachment'
-        )
-      else
-        File.open("ReportedErrorsLog.txt",'w') do |filea|
-          File.open("mylog.txt",'r') do |fileb|
-            while line = fileb.gets
-              filea.puts line
-            end
-          end
-
-
-        end
-        send_file(
-            "#{Rails.root}/ReportedErrorsLog.txt",
-            filename: "ReportedErrorsLog.txt",
-            type: "txt",
-            disposition: 'attachment'
-        )
-      end
-
-    end
-
   end
 
   def viewlogs
@@ -172,7 +114,8 @@ class ReportErrorsController < ApplicationController
       if @report_error.save
         # retrieve the instance/object of the MyLogger class
         logger = MyLogger.instance
-        logger.logInformation("#{Time.now} An error is reported by user_id: #{current_user.id} with the error message: #{@report_error.errormessage} and assigned to: #{@report_error.user_id}")
+        u = User.find_by_id(@report_error.user_id)
+        logger.logInformation("#{Time.now} An error is reported by user_id: #{current_user.id}, user_name: #{current_user.name} with the error message: #{@report_error.errormessage} and the error is assigned to user_id: #{@report_error.user_id}, user_name: #{u.name} ")
         #add_observer(ErrorObserver.new)
 
         #changed
@@ -220,5 +163,4 @@ class ReportErrorsController < ApplicationController
   def report_error_params
     params.require(:report_error).permit(:errormessage)
   end
-end
 end

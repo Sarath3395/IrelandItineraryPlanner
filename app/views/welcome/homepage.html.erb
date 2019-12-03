@@ -7,13 +7,13 @@
 
   <% else %>
     <table><h2><%= @hotelrecommendationtype %></h2>
-
+      <div class="border border-primary rounded p-3">
       <div class="row">
       <% i=0 %>
         <% @recommendedhotels.each do |key, value| -%>
-            <% if (i < 6) %>
+            <% if (i < 9) %>
               <% i=i+1 %>
-          <div class="col-sm-4">
+          <div class="col-sm-4 p-3">
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><%= link_to key.name , key %></h5>
@@ -47,9 +47,9 @@
 
         <br>
       </div>
+      </div>
 
     </table>
-
   <% end %>
 
   <% if (@recommendedrestaurants) == []  %>
@@ -60,14 +60,13 @@
 
   <% else %>
     <h2><%= @restaurantrecommendationtype %></h2>
-
-
+    <div class="border border-primary rounded p-3">
     <div class="row">
       <% i=0 %>
       <% @recommendedrestaurants.each do |key, value| -%>
-        <% if (i < 6) %>
+        <% if (i < 9) %>
           <% i=i+1 %>
-        <div class="col-sm-4">
+        <div class="col-sm-4 p-3">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= link_to key.name , key %></h5>
@@ -100,7 +99,7 @@
     </div>
 
     </table>
-
+    </div>
   <% end %>
 
 
@@ -111,15 +110,14 @@
 
 
   <% else %>
-
     <table><h2><%= @transportrecommendationtype %></h2>
-
+      <div class="border border-primary rounded p-3">
       <div class="row">
         <% i=0 %>
         <% @recommendedtransports.each do |key, value| -%>
-          <% if (i < 6) %>
+          <% if (i < 9) %>
             <% i=i+1 %>
-          <div class="col-sm-4">
+          <div class="col-sm-4" p-3>
             <div class="card">
               <div class="card-body">
                 <h5 class="card-title"><%= link_to key.name , key %></h5>
@@ -148,18 +146,19 @@
         <% end %>
         <br>
       </div>
-
+      </div>
     </table>
   <% end %>
 
 <% else %>
   <h2>Hotels List</h2>
+  <div class="border border-primary rounded p-3">
   <div class="row">
     <% i=0 %>
     <% @hotels.each do |hotel| -%>
-      <% if (i < 6) %>
+      <% if (i < 9) %>
         <% i=i+1 %>
-        <div class="col-sm-4">
+        <div class="col-sm-4 p-3">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= link_to hotel.name, hotel %></h5>
@@ -177,14 +176,16 @@
     <% end -%>
     <br>
   </div>
+  </div>
 
   <h2>Restaurants List</h2>
+  <div class="border border-primary rounded p-3">
   <div class="row">
     <% i=0 %>
     <% @restaurants.each do |restaurant| -%>
-      <% if (i < 6) %>
+      <% if (i < 9) %>
         <% i=i+1 %>
-        <div class="col-sm-4">
+        <div class="col-sm-4 p-3">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= link_to restaurant.name, restaurant %></h5>
@@ -202,18 +203,17 @@
     <% end -%>
     <br>
   </div>
+  </div>
 
 
   <h2>Transports List</h2>
-
-
-
+  <div class="border border-primary rounded p-3">
   <div class="row">
     <% i=0 %>
     <% @transports.each do |transport| -%>
-      <% if (i < 6) %>
+      <% if (i < 9) %>
         <% i=i+1 %>
-        <div class="col-sm-4">
+        <div class="col-sm-4 p-3">
           <div class="card">
             <div class="card-body">
               <h5 class="card-title"><%= link_to transport.name, transport %></h5>
@@ -230,5 +230,5 @@
     <% end -%>
     <br>
   </div>
-
+  </div>
 <% end %>

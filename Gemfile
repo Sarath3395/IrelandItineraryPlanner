@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 gem "recaptcha", require: "recaptcha/rails"
-
+gem 'geocoder'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
 # Use sqlite3 as the database for Active Record
@@ -16,7 +16,7 @@ gem 'favoriteshandler'
 gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
-
+gem 'win32console'
 gem 'rails-observers'
 group :development, :test do
 gem 'sqlite3'
@@ -77,6 +77,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :test do
   gem 'minitest-reporters'
+end
+group :test do
+  gem 'rails-controller-testing'
 end
 
 # Heroku uses Heroku Postgres DB based on PostgreSQL

@@ -1,23 +1,19 @@
 require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
-=begin
-   test "the truth" do
-     assert true
-   end
-=end
-  test "Member should not save without validation" do
+  test "User should not save without validation" do
     user = User.new
     assert_equal(false,user.save)
   end
-  test "should not save without the email" do
+  test "user should not save without the email" do
     user = User.new
     #member.email = "what@what.com"
-    user.user_name = "dghsdg"
+    #user.email = "dghsdg"
+    user.password = "Qwerty@123"
     assert_equal(false,user.save)
   end
 
-  test "should not save when email is not unique" do
+  test "user should not save when email is not unique" do
     user = User.new
     user.email = "what@what.com"
     user.password = "Qwerty@123"
@@ -29,7 +25,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
 
-  test "should not save without the password" do
+  test "user should not save without the password" do
     user = User.new
     user.email = "what@what.com"
     #member.password = "dghsdg"
@@ -37,7 +33,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
 
-  test "should not save the member when password is less than 9 characters" do
+  test "user should not save the member when password is less than 9 characters" do
     user = User.new
     user.email = "what@what.com"
     user.password = "Qwer!23"
@@ -60,10 +56,16 @@ class UserTest < ActiveSupport::TestCase
   test "should not save the member when password doesnt have 1 digit" do
     user = User.new
     user.email = "what@what.com"
-    user.password = "Qwertyuio"
+    user.password = "Qwertyuio!"
     assert_equal(false,user.save)
   end
-  test "should save the member when password have 1 uppercase, small case and a digit" do
+  test "should not save the member when password doesnt have 1 special character" do
+    user = User.new
+    user.email = "what@what.com"
+    user.password = "Qwertyuio1"
+    assert_equal(false,user.save)
+  end
+  test "should save the member when password have 1 uppercase small case special character and a digit" do
     user = User.new
     user.email = "what@what.com"
     user.password = "Qwerty@123"

@@ -26,7 +26,7 @@ class WelcomeController < ApplicationController
 				#@recommendedhotels = Hash.new(0)
 				res = RecommendationResultGenerator.new(RecommendationByTopratedHotels.new)
 				res.recommendresult(current_user.id)
-				@hotelrecommendationtype = "Recommended Hotels for You Based on MostFavorites"
+				@hotelrecommendationtype = "Recommended Hotels for #{current_user.name} Based on MostFavorites"
 				@recommendedhotels = res.it_planner_recommendation.type(current_user.id)
 
 			else
@@ -39,7 +39,7 @@ class WelcomeController < ApplicationController
 				#@recommendedhotels = Hash.new(0)
 				res = RecommendationResultGenerator.new(RecommendationByCollaborativeHotels.new)
 				res.recommendresult(current_user.id)
-				@hotelrecommendationtype = "Recommended Hotels for You Based on Similarity with Other Users"
+				@hotelrecommendationtype = "Recommended Hotels for #{current_user.name} Based on Similarity with Other Users"
 				@recommendedhotels = res.it_planner_recommendation.type(current_user.id)
 
 
@@ -54,7 +54,7 @@ class WelcomeController < ApplicationController
 =end
 				res = RecommendationResultGenerator.new(RecommendationByTopratedRestaurants.new)
 				res.recommendresult(current_user.id)
-				@restaurantrecommendationtype = "Recommended Restaurants for You Based on MostFavorites"
+				@restaurantrecommendationtype = "Recommended Restaurants for #{current_user.name} Based on MostFavorites"
 				@recommendedrestaurants = res.it_planner_recommendation.type(current_user.id)
 
       else
@@ -67,7 +67,7 @@ class WelcomeController < ApplicationController
 
 				res = RecommendationResultGenerator.new(RecommendationByCollaborativeRestaurants.new)
 				res.recommendresult(current_user.id)
-				@restaurantrecommendationtype = "Recommended Restaurants for You Based on Similarity with Other Users"
+				@restaurantrecommendationtype = "Recommended Restaurants for #{current_user.name} Based on Similarity with Other Users"
 				@recommendedrestaurants = res.it_planner_recommendation.type(current_user.id)
 
 			end
@@ -80,7 +80,7 @@ class WelcomeController < ApplicationController
 =end
 				res = RecommendationResultGenerator.new(RecommendationByTopratedTransports.new)
 				res.recommendresult(current_user.id)
-				@transportrecommendationtype = "Recommended Transports for You Based on MostFavorites"
+				@transportrecommendationtype = "Recommended Transports for #{current_user.name} Based on MostFavorites"
 				@recommendedtransports = res.it_planner_recommendation.type(current_user.id)
 			else
 =begin
@@ -90,7 +90,7 @@ class WelcomeController < ApplicationController
 =end
 				res = RecommendationResultGenerator.new(RecommendationByCollaborativeTransports.new)
 				res.recommendresult(current_user.id)
-				@transportrecommendationtype = "Recommended Transports for You Based on Similarity with Other Users"
+				@transportrecommendationtype = "Recommended Transports for #{current_user.name} Based on Similarity with Other Users"
 				@recommendedtransports = res.it_planner_recommendation.type(current_user.id)
 			end
 
