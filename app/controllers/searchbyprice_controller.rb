@@ -39,7 +39,17 @@ class SearchbypriceController < ApplicationController
     noofrooms = params[:noofrooms]
     price = params[:price]
 
-    @@trip = TripController.new(fromdate,todate,noofpersons)
+    #@@trip = TripController.new(fromdate,todate,noofpersons)
+    #Itineraryplannerbyprice.tripcreater(fromdate,todate,noofpersons)
+    #SearchbypriceController.itineraryprepare([fromdate,todate,noofpersons])
+    trip = TripController.instance
+    trip.fromdate=fromdate
+    trip.todate=todate
+    trip.noofpersons=noofpersons
+    trip.price=0
+    trip.elements=[]
+
+
 
     str1 = "ss=Dublin&"
     str2 = "is_ski_area=0&"
@@ -135,112 +145,36 @@ class SearchbypriceController < ApplicationController
     end  
 
        puts @@scrappedHotels 
-
+       if(current_user)
         @likedHotels=[]
         LikedHotel.find_each do |likedhotel|
+             if(likedhotel.user_id == current_user.id)
             @hotel = Hotel.find(likedhotel.hotel_id)
             @likedHotels << @hotel
         end
+        end
 
-       @dublinhotels = self.sortinghotels(@likedHotels,@dublinhotels)
+       @dublinhotels = SearchbypriceController.sortinghotels(@likedHotels,@dublinhotels)
        @@dublinhotels= @dublinhotels
        
-       @galwayhotels = self.sortinghotels(@likedHotels,@galwayhotels)
+       @galwayhotels = SearchbypriceController.sortinghotels(@likedHotels,@galwayhotels)
        @@galwayhotels= @galwayhotels
 
-       @corkhotels = self.sortinghotels(@likedHotels,@corkhotels)
+       @corkhotels = SearchbypriceController.sortinghotels(@likedHotels,@corkhotels)
        @@corkhotels= @corkhotels
 
-       @limerickhotels = self.sortinghotels(@likedHotels,@limerickhotels)
+       @limerickhotels = SearchbypriceController.sortinghotels(@likedHotels,@limerickhotels)
        @@limerickhotels= @limerickhotels
 
-       @belfasthotels = self.sortinghotels(@likedHotels,@belfasthotels)
+       @belfasthotels = SearchbypriceController.sortinghotels(@likedHotels,@belfasthotels)
        @@belfasthotels= @belfasthotels
 
-       @newryhotels = self.sortinghotels(@likedHotels,@newryhotels)
+       @newryhotels = SearchbypriceController.sortinghotels(@likedHotels,@newryhotels)
        @@newryhotels= @newryhotels
-  
+    end
     self.updatehotelstable
   end
 
-  def sortinghotels(likedhotels,scrappedhotels)
-
-       firstScrappedHotels=[]
-       likedhotels.each_with_index do |val, index|
-            scrappedhotels.each_with_index do |vale, indexw|
-                    if((val.coordinates.eql? vale["location"]) && (val.location_id == vale["location_id"]))
-                        firstScrappedHotels << vale
-                        break
-                    end
-            end
-
-       end
-     remainScrappedHotels = scrappedhotels - firstScrappedHotels
-       sortedScrappedhotels = firstScrappedHotels + remainScrappedHotels
-
-       return sortedScrappedhotels
-  end
-
-    def sortingtransport(likedtransport,scrappedtransport)
-
-       firstScrappedtransport=[]
-            preferred = likedtransport.each_with_object(Hash.new(0)) { |trans1, trans2| trans2[trans1[:transporttype]] += 1 }
-            preferredArr =preferred.sort_by{|k, v| v}.reverse
-            preferredArr.each_with_index do |val, index|
-            scrappedtransport.each_with_index do |vale, indexw|
-                    if((val[0].eql? vale["when"]))
-                        firstScrappedtransport << vale
-                    end
-            end
-       end
-
-     remainScrappedTransport = scrappedtransport - firstScrappedtransport
-       sortedScrappedtransport = firstScrappedtransport + remainScrappedTransport
-
-       return sortedScrappedtransport
-  end
-
-    def sortingrestaurant(likedRestaurant,scrappedrestaurant)
-      
-        preferredfortype = likedRestaurant.each_with_object(Hash.new(0)) { |rest1, rest2| rest2[rest1[:foodtype]] += 1 }
-         preferredforcost = likedRestaurant.each_with_object(Hash.new(0)) { |rest1, rest2| rest2[rest1[:price]] += 1 }
-
-         preferred = preferredfortype.merge(preferredforcost)
-
-        preferredArr =preferred.sort_by{|k, v| v}.reverse
-
-        preferredtypeArr =preferredfortype.sort_by{|k, v| v}.reverse
-        preferredcostArr =preferredforcost.sort_by{|k, v| v}.reverse
-
-        resultArr =[]
-        sortingorderArr =[]
-        scrappedrestaurant.each_with_index do |val, index|
-        count=0
-            preferredArr.each_with_index do |val1, index1|
-            
-                    if((val1[0].eql? val["type"]))
-                        count+=val1[1]
-                    elsif((val1[0].eql? val["economy"]))
-                        count+=val1[1]
-                    end
-
-            end
-                    output = Hash.new
-                    output.store("score", count)
-                    output.store("placement", index)
-                    sortingorderArr << output
-
-        end
-
-
-    sortingorderArr= sortingorderArr.sort_by {|sorthash| sorthash["score"]}.reverse
-    sortingorderArr.each_with_index do |val, index|
-        resultArr << scrappedrestaurant[val["placement"]]
-    end
-
-
-       return resultArr
-  end
 
    def searchtransportrestaurant
 
@@ -352,16 +286,18 @@ indexofarray= indexofarray.to_i
     puts @scrappedoutwardtransport.inspect
     puts "-------------------------------------------------------------------------------------------------"
     puts "-------------------------------------------------------------------------------------------------"
-  
+        if(current_user)
         @likedtransport=[]
         LikedTransport.find_each do |likedtransport|
+             if(likedtransport.user_id == current_user.id)
             @transport = Transport.find(likedtransport.transport_id)
             @likedtransport << @transport
         end
+        end
 
-        @scrappedinwardtransport = self.sortingtransport(@likedtransport,@scrappedinwardtransport)
-        @scrappedoutwardtransport = self.sortingtransport(@likedtransport,@scrappedoutwardtransport)
-
+        @scrappedinwardtransport = SearchbypriceController.sortingtransport(@likedtransport,@scrappedinwardtransport)
+        @scrappedoutwardtransport = SearchbypriceController.sortingtransport(@likedtransport,@scrappedoutwardtransport)
+        end
 
     restdefaulturl = "https://www.tripadvisor.ie/Restaurants-#{@destinationlocation.restscrapper_id}"
     restaurants = RestaurantScrapper.scrape(restdefaulturl)
@@ -381,16 +317,18 @@ indexofarray= indexofarray.to_i
           @scrappedrestaurant << val
         end  
             
-    
     end
 
+        if(current_user)
         @likedrestaurant=[]
         LikedRestaurant.find_each do |likedRestaurant|
+            if(likedRestaurant.user_id == current_user.id)
             @restaurant = Restaurant.find(likedRestaurant.restaurant_id)
             @likedrestaurant << @restaurant
         end
-        @scrappedrestaurant = self.sortingrestaurant(@likedrestaurant,@scrappedrestaurant)
-
+        end
+        @scrappedrestaurant = SearchbypriceController.sortingrestaurant(@likedrestaurant,@scrappedrestaurant)
+        end
 self.updatetransporttable
 self.updaterestauranttable
   end
@@ -418,11 +356,6 @@ def userpreference
         checkedresedit << val  
     end
  
- puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------empty trip Object elements---------------------------------------------------------------"
-puts @@trip.elements.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
 
         @hotel = Hotel.find_by_coordinates(hotel["location"])
         likedhotel = LikedHotel.new
@@ -432,13 +365,12 @@ puts "--------------------------------------------------------------------------
         likedhotel.save
         end
         @hotel.price=hotel["price"]
-         @@trip = TriphotelController.new(@@trip,@hotel)
 
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------after adding hotel trip Object elements---------------------------------------------------------------"
-puts @@trip.elements.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
+        #trip=SearchbypriceController.itineraryprepare(@hotel)
+        #Itineraryplannerbyprice.tripadder(@hotel)
+        basetrip = TripController.instance
+        hoteltrip = TriphotelController.new(basetrip,@hotel)
+
 
      #  checkedtransoutedit.each_with_index do |val, index|
         @outtransport = Transport.find_by_name("#{@@originlocation.name}_to_#{@@destinationlocation.name}_"+checkedtransoutedit[0]["id"])
@@ -461,66 +393,45 @@ puts "--------------------------------------------------------------------------
         end
         @outtransport.price = checkedtransoutedit[0]["price"]
         @intransport.price = checkedtransinedit[0]["price"]
-        @@trip = TriptransportController.new(@@trip,@outtransport)
+        
+        outwardtrip = TriptransportController.new(hoteltrip,@outtransport)
+        
+        inwardtrip = TriptransportController.new(outwardtrip,@intransport)
 
-       puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------after add 1st transport trip Object elements---------------------------------------------------------------"
-puts @@trip.elements.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
+        #trip=SearchbypriceController.itineraryprepare(@outtransport)
+        #trip= SearchbypriceController.itineraryprepare(@intransport)
+        
 
-
-        @@trip = TriptransportController.new(@@trip,@intransport)
+        #Itineraryplannerbyprice.tripadder(@outtransport)
+        #Itineraryplannerbyprice.tripadder(@intransport)
        #end
 
-       puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------after add 2nd transport trip Object elements---------------------------------------------------------------"
-puts @@trip.elements.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
-
-
-       checkedresedit.each_with_index do |val, index|
-        @restaurant = Restaurant.find_by(name: val["name"], location_id: @@destinationlocation.id)
+       #checkedresedit.each_with_index do |val, index|
+        @restaurant = Restaurant.find_by(name: checkedresedit[0]["name"], location_id: @@destinationlocation.id)
         likedrestaurant = LikedRestaurant.new
         likedrestaurant.user_id = current_user.id
         likedrestaurant.restaurant_id = @restaurant.id
         if !LikedRestaurant.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
             likedrestaurant.save
         end
-        @@trip = TriprestaurantController.new(@@trip,@restaurant)
-       end
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------trip Object---------------------------------------------------------------"
-puts @@trip.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
+        
+        finaltrip = TriprestaurantController.new(inwardtrip,@restaurant)
+        #Itineraryplannerbyprice.tripadder(@restaurant)
+        #trip =SearchbypriceController.itineraryprepare(@restaurant)
+       #end
 
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------trip Object price---------------------------------------------------------------"
-puts @@trip.price
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
+tripelements = finaltrip.elements
 
-
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "-----------------------------------------------------------------------------------------------------------"
-puts "--------------------------------------------trip Object elements---------------------------------------------------------------"
-puts @@trip.elements.inspect
-puts "-----------------------------------------------------------------------------------------------------------"
-
-@trip = @@trip.elements
-
-@fromdate = @@trip.fromdate
-@todate = @@trip.todate
-@noofpersons = @@trip.noofpersons
-@price = @@trip.price.round(2)
-
+@fromdate = finaltrip.fromdate
+@todate = finaltrip.todate
+@noofpersons = finaltrip.noofpersons
+@price = finaltrip.price.round(2)
+puts "-----------------------------trip object. elements----------------------------------------------"
+puts TripController.instance.inspect
+puts "------------------------------------------------------------------------------------------"
 @resultTransport =[]
 @resultRestaurant=[]
-@trip.each_with_index do |val, index|
+tripelements.each_with_index do |val, index|
         if(val.class.name.eql? "Hotel")
             @resultHotel = val
 
@@ -533,6 +444,85 @@ puts "--------------------------------------------------------------------------
 
    end 
 end
+ 
+  def self.sortinghotels(likedhotels,scrappedhotels)
+
+       firstScrappedHotels=[]
+       likedhotels.each_with_index do |val, index|
+            scrappedhotels.each_with_index do |vale, indexw|
+                    if((val.coordinates.eql? vale["location"]) && (val.name == vale["name"]))
+                        firstScrappedHotels << vale
+                        break
+                    end
+            end
+
+       end
+     remainScrappedHotels = scrappedhotels - firstScrappedHotels
+       sortedScrappedhotels = firstScrappedHotels + remainScrappedHotels
+
+       return sortedScrappedhotels
+  end
+
+    def self.sortingtransport(likedtransport,scrappedtransport)
+
+       firstScrappedtransport=[]
+            preferred = likedtransport.each_with_object(Hash.new(0)) { |trans1, trans2| trans2[trans1[:transporttype]] += 1 }
+            preferredArr =preferred.sort_by{|k, v| v}.reverse
+            preferredArr.each_with_index do |val, index|
+            scrappedtransport.each_with_index do |vale, indexw|
+                    if((val[0].eql? vale["when"]))
+                        firstScrappedtransport << vale
+                    end
+            end
+       end
+
+     remainScrappedTransport = scrappedtransport - firstScrappedtransport
+       sortedScrappedtransport = firstScrappedtransport + remainScrappedTransport
+
+       return sortedScrappedtransport
+  end
+
+    def self.sortingrestaurant(likedRestaurant,scrappedrestaurant)
+
+        preferredfortype = likedRestaurant.each_with_object(Hash.new(0)) { |rest1, rest2| rest2[rest1[:foodtype]] += 1 }
+         preferredforcost = likedRestaurant.each_with_object(Hash.new(0)) { |rest1, rest2| rest2[rest1[:price]] += 1 }
+
+         preferred = preferredfortype.merge(preferredforcost)
+
+        preferredArr =preferred.sort_by{|k, v| v}.reverse
+
+        preferredtypeArr =preferredfortype.sort_by{|k, v| v}.reverse
+        preferredcostArr =preferredforcost.sort_by{|k, v| v}.reverse
+
+        resultArr =[]
+        sortingorderArr =[]
+        scrappedrestaurant.each_with_index do |val, index|
+        count=0
+            preferredArr.each_with_index do |val1, index1|
+            
+                    if((val1[0].eql? val["type"]))
+                        count+=val1[1]
+                    elsif((val1[0].eql? val["economy"]))
+                        count+=val1[1]
+                    end
+
+            end
+                    output = Hash.new
+                    output.store("score", count)
+                    output.store("placement", index)
+                    sortingorderArr << output
+
+        end
+
+
+    sortingorderArr= sortingorderArr.sort_by {|sorthash| sorthash["score"]}.reverse
+    sortingorderArr.each_with_index do |val, index|
+        resultArr << scrappedrestaurant[val["placement"]]
+    end
+
+
+       return resultArr
+  end
 
   def updatehotelstable
     #tmp = @scrappedHotels.first()
@@ -552,8 +542,6 @@ end
          hotel.save
       end
       end
-
-
     
   end
 
@@ -569,11 +557,6 @@ def updaterestauranttable
          
 
         if !Restaurant.find_by(name: restaurant.name, location_id: @destinationlocation.id)
-        puts "-------------------------------------saved Restaurant details-----------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
-        puts restaurant.inspect
-        puts "-----------------------------------------------------------------------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
          if(!restaurant.name.include? "NA")
           restaurant.save  
           end 
@@ -595,12 +578,7 @@ end
    
 
         if !Transport.find_by_name(transport.name)
-        puts "-------------------------------------saved out transport details-----------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
-        puts transport.inspect
-        puts "-----------------------------------------------------------------------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
-          transport.save   
+            transport.save   
         end
       end
 
@@ -617,23 +595,11 @@ end
    
    
         if !Transport.find_by_name(transport.name)
-        puts "-------------------------------------saved in transport details-----------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
-        puts transport.inspect
-        puts "-----------------------------------------------------------------------------------------------"
-        puts "-----------------------------------------------------------------------------------------------"
-         
           transport.save   
         end
 
       end
   end
-
-
-
-
-
-
 
 
 

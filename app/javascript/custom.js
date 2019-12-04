@@ -61,7 +61,7 @@ for (i=0;i<select.length;  i++) {
     $("#noofpersons").on('change',function(){
 
         var noofpersons = $("#noofpersons").val();
-        var one = ["0€ to 25€", "25€ to 50€", "50€ to 75€", "75€ to 100€"];
+        var one = ["0€ to 50€", "50€ to 100€", "100€ to 150€", "150€ to 200€"];
         var two = ["0€ to 50€", "50€ to 100€", "100€ to 150€", "150€ to 200€"];
         var three = ["0€ to 75€", "75€ to 150€", "150€ to 225€", "225€ to 300€"];
         var four = ["0€ to 100€", "100€ to 200€", "200€ to 300€", "300€ to 400€"];

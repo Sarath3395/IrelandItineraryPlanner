@@ -1,13 +1,37 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+#Average - 3
+#european - 3
+#expensive - 2
+#indian - 1
+#irish -1
+
 one:
-  name: MyString
-  foodtype: MyString
-  price: MyString
+  name: name
+  foodtype: Indian
+  price: average
   location: one
 
 two:
-  name: MyString
-  foodtype: MyString
-  price: MyString
+  name: name
+  foodtype: European
+  price: average
+  location: two
+
+three:
+  name: name
+  foodtype: European
+  price: average
+  location: two
+
+four:
+  name: name
+  foodtype: European
+  price: expensive
+  location: two
+
+five:
+  name: name
+  foodtype: Irish
+  price: expensive
   location: two
