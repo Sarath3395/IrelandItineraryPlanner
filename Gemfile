@@ -18,9 +18,13 @@ gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
 gem 'rails-observers'
+
+
 group :development, :test do
 gem 'sqlite3'
 end
+
+
 gem 'recommendationforuser'
 gem 'rails-observers'
 
@@ -28,8 +32,8 @@ gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'
 gem 'bookingscrapper', '2.0.1'
-gem 'transportscrapper', '1.0.7'
-gem 'restaurantscrapper', '0.0.1'
+gem 'transportscrapper', '1.0.8'
+gem 'restaurantscrapper', '0.0.2'
 
 
 gem "font-awesome-rails"
