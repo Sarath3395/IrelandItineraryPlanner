@@ -1,5 +1,4 @@
 require 'bookingscrapper'
-require 'transportscrapper'
 require 'restaurantscrapper'
 require 'time'
 
