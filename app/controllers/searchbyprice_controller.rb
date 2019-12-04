@@ -1,5 +1,6 @@
 require 'bookingscrapper'
-
+require 'transportscrapper'
+require 'restaurantscrapper'
 require 'time'
 
 class SearchbypriceController < ApplicationController
