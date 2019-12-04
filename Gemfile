@@ -79,7 +79,6 @@ group :test do
 end
 group :test do
   gem 'rails-controller-testing'
-  gem 'win32console'
 
 end
 
