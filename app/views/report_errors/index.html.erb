@@ -3,22 +3,20 @@
 
 <h1>Reported Errors That are Assigned to You</h1>
 
-<table>
-  <thead>
+<table class="table">
+  <thead class="thead-dark">
     <tr>
-      <th>Errormessage</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th scope="col">ReportedError Id</th>
+      <th scope="col">Error Message</th>
+      <th scope="col" ></th>
     </tr>
   </thead>
 
   <tbody>
     <% @report_errors.each do |report_error| %>
       <tr>
+        <th scope="row"><%= report_error.id %></th>
         <td><%= report_error.errormessage %></td>
-        <td><%= report_error.user_id %></td>
-        <td><%= link_to 'Show', report_error %></td>
-        <td><%= link_to 'Edit', edit_report_error_path(report_error) %></td>
         <td><%= link_to 'Destroy', report_error, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
