@@ -1,7 +1,6 @@
 require 'bookingscrapper'
-require 'restaurantscrapper'
 require 'transportscrapper'
-
+require 'restaurantscrapper'
 
 class SearchController < ApplicationController
 
