@@ -8,12 +8,15 @@ gem 'geocoder'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
 # Use sqlite3 as the database for Active Record
-
 gem 'omniauth-google-oauth2'
 gem 'brakeman'
 gem 'omniauth-facebook'
 
-gem 'favoriteshandler'
+gem 'numbered_logs_decorator'
+gem 'recommendationforuser'
+gem 'recommendation_strategy'
+gem 'favouriteshandler'
+
 gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
@@ -23,6 +26,7 @@ gem 'rails-observers'
 group :development, :test do
 gem 'sqlite3'
 end
+
 
 
 gem 'recommendationforuser'
@@ -57,7 +61,7 @@ gem 'devise'
 # Heroku uses Heroku Postgres DB based on PostgreSQL
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.1.0', '< 1.4.2', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

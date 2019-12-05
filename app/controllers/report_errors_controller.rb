@@ -109,15 +109,22 @@ class ReportErrorsController < ApplicationController
     adminusers = User.where(admin: true)
     aduser = adminusers.order("RANDOM()")
     @report_error.user_id = aduser.first.id
-
+    if( user_signed_in? )
+      @reported_by = curren_user.name
+    else
+      @reported_by = "User Not LoggedIn"
+    end
     respond_to do |format|
       if @report_error.save
         # retrieve the instance/object of the MyLogger class
         logger = MyLogger.instance
         u = User.find_by_id(@report_error.user_id)
-        logger.logInformation("#{Time.now} An error is reported by user_id: #{current_user.id}, user_name: #{current_user.name} with the error message: #{@report_error.errormessage} and the error is assigned to user_id: #{@report_error.user_id}, user_name: #{u.name} ")
-        #add_observer(ErrorObserver.new)
+        if (@reported_by == "User Not LoggedIn")
+        logger.logInformation("#{Time.now} An error is reported by user_id: #{@reported_by}, user_name: #{@reported_by} with the error message: #{@report_error.errormessage} and the error is assigned to user_id: #{@report_error.user_id}, user_name: #{u.name} ")
 
+        else
+          logger.logInformation("#{Time.now} An error is reported by user_id: #{current_user.id}, user_name: #{current_user.name} with the error message: #{@report_error.errormessage} and the error is assigned to user_id: #{@report_error.user_id}, user_name: #{u.name} ")
+        end
         #changed
         #notify_observers(self, @report_error)
         format.html { redirect_to root_path, notice: 'Report error was successfully created.' }
