@@ -1,12 +1,10 @@
+require 'singleton'
+
 class TripController < ApplicationController
 
-	def initialize(fromdate, todate, noofpersons)
-		@fromdate = fromdate
-		@todate = todate
-		@noofpersons = noofpersons
-		@price = 0
-		@elements=[]
-	end
+include Singleton
+
+attr_accessor :fromdate, :todate, :noofpersons, :price, :elements
 	
 	def price
 		 return @price
