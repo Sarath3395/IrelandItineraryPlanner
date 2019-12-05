@@ -1,3 +1,4 @@
+require 'it_planner_recommendation'
 require 'recommendation_result_generator'
 
 

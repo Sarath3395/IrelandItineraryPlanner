@@ -12,10 +12,11 @@ gem 'omniauth-google-oauth2'
 gem 'brakeman'
 gem 'omniauth-facebook'
 
+gem 'favouriteshandler'
+gem 'chartdecorator'
 gem 'numbered_logs_decorator'
 gem 'recommendationforuser'
 gem 'recommendation_strategy'
-gem 'favouriteshandler'
 
 gem 'prawn'
 gem 'chartkick'
