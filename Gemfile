@@ -35,9 +35,9 @@ gem 'rails-observers'
 gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'
-gem 'bookingscrapper', '2.0.2'
-gem 'transportscrapper', '1.0.8'
-gem 'restaurantscrapper', '0.0.2'
+gem 'bookingscrapper'
+gem 'transportscrapper'
+gem 'restaurantscrapper'
 
 
 gem "font-awesome-rails"
