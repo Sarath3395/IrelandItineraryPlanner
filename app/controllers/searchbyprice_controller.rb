@@ -224,10 +224,16 @@ indexofarray= indexofarray.to_i
     returnyear = todate.year
 
     
+    puts "-----------------------------------data for transportscrapper-----------------------------------"
+    puts "-------------------------------------------------------------------------------------------------"
+    puts @@originlocation.inspect
+    puts @@destinationlocation.inspect
+    puts "-------------------------------------------------------------------------------------------------"
+    puts "-------------------------------------------------------------------------------------------------"
 
     defaultUrl = "https://national.buseireann.ie/?"
-    str1 = "originStop=#{@originlocation.transcrapper_id}&"
-    str2 = "destinationstop=#{@destinationlocation.transcrapper_id}&"
+    str1 = "originStop=#{@@originlocation.transcrapper_id}&"
+    str2 = "destinationstop=#{@@destinationlocation.transcrapper_id}&"
     str3 = "ticketType=2&"
     str4 = "departdate=#{onwarddate}-#{onwardmonth}-#{onwardyear}&"
     str5 = "returndate=#{returndate}-#{returnmonth}-#{returnyear}&"
