@@ -527,6 +527,8 @@ end
   def updatehotelstable
     #tmp = @scrappedHotels.first()
     #tmp = {"name"=>"Cheap Accommodation close to Dublin city Center and Dublin Airport", "rank"=>"8.1", "location"=>"-6.256648,53.400534", "address"=>"Dublin", "roomtype"=>"One-Bedroom Apartment", "bedtype"=>"1 queen bed", "price"=>"149", "location_id"=>1},{"name"=>"Dublin beautiful stay, close to centre, university, business park, RDS", "rank"=>"NA", "location"=>"-6.228868,53.30097", "address"=>"Dublin", "roomtype"=>"Double or Twin Room", "bedtype"=>"1 full bed", "price"=>"244", "location_id"=>1},{"name"=>"The Gibson Hotel", "rank"=>"8.7", "location"=>"-6.22855871915817,53.3485371404209", "address"=>"Dublin City Centre, Dublin", "roomtype"=>"NA", "bedtype"=>"NA", "price"=>"SOLD OUT", "location_id"=>1}
+    
+ @hotelsall = Hotel.all
     @scrappedHotels.each_with_index do |val, index|
         hotel = Hotel.new
         hotel.name = val["name"]
@@ -538,9 +540,18 @@ end
         hotel.price = val["price"]
         hotel.location_id = val["location_id"]
 
-        if !Hotel.find_by(name: hotel.name, coordinates: hotel.coordinates)
+    
+        flag =false
+        @hotelsall.each_with_index do |val, index|
+            if((val.name.eql? hotel.name) && (val.coordinates.eql? hotel.coordinates))
+                flag = true
+                break
+            end
+         end
+
+        if !flag
          hotel.save
-      end
+        end
       end
     
   end
@@ -548,6 +559,7 @@ end
 
 def updaterestauranttable
 
+ @restaurantall = Restaurant.all
     @scrappedrestaurant.each_with_index do |val, index|
       restaurant = Restaurant.new
         restaurant.name = val["name"]
@@ -555,15 +567,23 @@ def updaterestauranttable
         restaurant.price = val["economy"]
         restaurant.location_id = @destinationlocation.id
          
+        flag =false
+        @restaurantall.each_with_index do |val, index|
+            if((val.name.eql? restaurant.name) && (val.location_id.eql? @destinationlocation.id))
+                flag = true
+                break
+            end
+         end
 
-        if !Restaurant.find_by(name: restaurant.name, location_id: @destinationlocation.id)
-         if(!restaurant.name.include? "NA")
-          restaurant.save  
-          end 
+        if !flag
+         restaurant.save
         end
+
       end
 end
   def updatetransporttable
+
+ @transportall = Transport.all
 
     @scrappedoutwardtransport.each_with_index do |val, index|
       transport = Transport.new
@@ -577,9 +597,18 @@ end
         transport.transporttype = val["when"]
    
 
-        if !Transport.find_by_name(transport.name)
-            transport.save   
+        flag =false
+        @transportall.each_with_index do |val, index|
+            if((val.name.eql? transport.name))
+                flag = true
+                break
+            end
+         end
+
+        if !flag
+         transport.save
         end
+
       end
 
         @scrappedinwardtransport.each_with_index do |val, index|
@@ -594,8 +623,16 @@ end
         transport.transporttype = val["when"]
    
    
-        if !Transport.find_by_name(transport.name)
-          transport.save   
+        flag =false
+        @transportall.each_with_index do |val, index|
+            if((val.name.eql? transport.name))
+                flag = true
+                break
+            end
+         end
+
+        if !flag
+         transport.save
         end
 
       end
