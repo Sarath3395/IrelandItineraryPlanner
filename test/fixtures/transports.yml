@@ -1,21 +1,63 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+
 one:
-  name: MyString
-  transporttype: MyString
-  origin: MyString
-  destination: MyString
-  departure: 2019-10-29 16:14:13
-  arrival: 2019-10-29 16:14:13
-  price: MyString
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: early morning
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
   location: one
 
+
 two:
-  name: MyString
-  transporttype: MyString
-  origin: MyString
-  destination: MyString
-  departure: 2019-10-29 16:14:13
-  arrival: 2019-10-29 16:14:13
-  price: MyString
-  location: two
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: after noon
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
+  location: one
+
+three:
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: early moring
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
+  location: one
+
+four:
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: night
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
+  location: one
+
+five:
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: late morning
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
+  location: one
+
+six:
+  name: Dublin_to_Galway_20:30_00:10_20
+  transporttype: night
+  origin: Dublin
+  destination: Galway
+  departure: 2019-12-02 20:30:00
+  arrival: 2019-12-02 00:10:00
+  price: 10.92
+  location: one

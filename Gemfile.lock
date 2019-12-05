@@ -253,7 +253,9 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    restaurantscrapper (0.0.0)
+    restaurantscrapper (0.0.2)
+      nokogiri
+      watir
     ruby-progressbar (1.10.1)
     rubyzip (2.0.0)
     sass (3.7.4)
@@ -290,7 +292,9 @@ GEM
     thor (0.20.3)
     thread_safe (0.3.6)
     tilt (2.0.10)
-    transportscrapper (1.0.6)
+    transportscrapper (1.0.8)
+      nokogiri
+      watir
     ttfunk (1.5.1)
     turbolinks (5.2.1)
       turbolinks-source (~> 5.2)
@@ -330,6 +334,8 @@ PLATFORMS
 DEPENDENCIES
   bookingscrapper
   bootsnap (>= 1.1.0, < 1.4.2)
+  bookingscrapper (= 2.0.1)
+  bootsnap (>= 1.4.2)
   brakeman
   byebug
   capybara (>= 2.15)
@@ -356,11 +362,11 @@ DEPENDENCIES
   recaptcha
   recommendation_strategy
   recommendationforuser
-  restaurantscrapper
+  restaurantscrapper (= 0.0.2)
   sass-rails (~> 5)
   selenium-webdriver
   sqlite3
-  transportscrapper (= 1.0.6)
+  transportscrapper (= 1.0.8)
   turbolinks (~> 5)
   tzinfo-data
   watir

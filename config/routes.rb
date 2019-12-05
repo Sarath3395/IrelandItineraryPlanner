@@ -32,6 +32,7 @@ root 'welcome#homepage'
  post '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
  get '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
 
+
   post '/userpreference' => 'searchbyprice#userpreference'
  get '/userpreference' => 'searchbyprice#userpreference'
 
