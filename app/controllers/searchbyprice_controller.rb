@@ -176,11 +176,11 @@ class SearchbypriceController < ApplicationController
   end
 
 
-   def searchtransportrestaurant
+   def searchtransport
 
 @scrappedoutwardtransport = []
 @scrappedinwardtransport = []
-@scrappedrestaurant = []
+
 
 origin_id = params[:search][:origin]
 destination_id = params[:search][:destination]
@@ -203,6 +203,10 @@ indexofarray= indexofarray.to_i
     elsif(@destinationlocation.name.include? "Newry")
         @hotel = @@newryhotels[indexofarray]
     end
+
+    @hotel.store("hashfor", "hotel")
+    basetrip = TripController.instance
+    @@hoteltrip = TriphotelController.new(basetrip,@hotel)
 
     
     fromdatestr = @hotel["fromdate"]
@@ -299,7 +303,44 @@ indexofarray= indexofarray.to_i
         @scrappedoutwardtransport = SearchbypriceController.sortingtransport(@likedtransport,@scrappedoutwardtransport)
         end
 
-    restdefaulturl = "https://www.tripadvisor.ie/Restaurants-#{@destinationlocation.restscrapper_id}"
+self.updatetransporttable
+
+  end
+def searchrestaurant
+
+    checkedtransoutedit = []
+    checkedtransinedit = []
+    checkedtransout =params[:checkedtransout]
+    checkedtransin =params[:checkedtransin]
+
+    checkedtransout.each_with_index do |val, index|
+        val = eval(val)
+        checkedtransoutedit << val  
+    end
+    checkedtransin.each_with_index do |val, index|
+        val = eval(val)
+        checkedtransinedit << val  
+    end
+
+checkedtransoutedit[0].store("hashfor", "outbound")
+checkedtransoutedit[0].store("origin",@@originlocation.name )
+checkedtransoutedit[0].store("destination", @@destinationlocation.name)
+
+        outwardtrip = TriptransportController.new(@@hoteltrip,checkedtransoutedit[0])
+        puts "-------------------------------------------outwardinspect-------------------"
+puts "---------------------------------------------------------------------------------"
+puts outwardtrip.inspect
+
+checkedtransinedit[0].store("hashfor", "inbound")
+checkedtransinedit[0].store("destination",@@originlocation.name )
+checkedtransinedit[0].store("origin", @@destinationlocation.name)
+        @@transporttrip = TriptransportController.new(outwardtrip,checkedtransinedit[0])
+        puts "-------------------------------------------inwardinspect-------------------"
+puts "---------------------------------------------------------------------------------"
+puts @@transporttrip.inspect
+
+@scrappedrestaurant = []
+    restdefaulturl = "https://www.tripadvisor.ie/Restaurants-#{@@destinationlocation.restscrapper_id}"
     restaurants = RestaurantScrapper.scrape(restdefaulturl)
 
     puts restaurants
@@ -329,51 +370,55 @@ indexofarray= indexofarray.to_i
         end
         @scrappedrestaurant = SearchbypriceController.sortingrestaurant(@likedrestaurant,@scrappedrestaurant)
         end
-self.updatetransporttable
+
 self.updaterestauranttable
-  end
 
+
+end    
 def userpreference
-    checkedtransoutedit = []
-    checkedtransinedit = []
-    checkedresedit =[]
-    checkedtransout =params[:checkedtransout]
-    checkedtransin =params[:checkedtransin]
-    checkedres =params[:checkedres]
-    hotelraw = params[:prefer][:hotel]
-    hotel = eval(hotelraw)
 
-    checkedtransout.each_with_index do |val, index|
-        val = eval(val)
-        checkedtransoutedit << val  
-    end
-    checkedtransin.each_with_index do |val, index|
-        val = eval(val)
-        checkedtransinedit << val  
-    end
+    checkedresedit =[]
+    checkedres =params[:checkedres]
+
     checkedres.each_with_index do |val, index|
         val = eval(val)
         checkedresedit << val  
     end
  
+    checkedresedit[0].store("hashfor", "restaurant")
+    finaltrip = TriprestaurantController.new(@@transporttrip,checkedresedit[0])
+    tripelements = finaltrip.elements
 
-        @hotel = Hotel.find_by_coordinates(hotel["location"])
+@resultTransport =[]
+@resultRestaurant=[]
+    tripelements.each_with_index do |val, index|
+        if(val["hashfor"].eql? "hotel")
+            @resultHotel = val
+
+        elsif((val["hashfor"].eql? "inbound") || (val["hashfor"].eql? "outbound"))
+            @resultTransport << val
+
+        elsif(val["hashfor"].eql? "restaurant")
+            @resultRestaurant << val
+        end    
+
+    end 
+
+puts "-----------------------------trip object. elements----------------------------------------------"
+puts TripController.instance.inspect
+puts "------------------------------------------------------------------------------------------"
+
+        @hotel = Hotel.find_by_coordinates(@resultHotel["location"])
         likedhotel = LikedHotel.new
         likedhotel.user_id = current_user.id
         likedhotel.hotel_id = @hotel.id
         if !LikedHotel.find_by(user_id: current_user.id, hotel_id: @hotel.id)
         likedhotel.save
         end
-        @hotel.price=hotel["price"]
-
-        #trip=SearchbypriceController.itineraryprepare(@hotel)
-        #Itineraryplannerbyprice.tripadder(@hotel)
-        basetrip = TripController.instance
-        hoteltrip = TriphotelController.new(basetrip,@hotel)
 
 
      #  checkedtransoutedit.each_with_index do |val, index|
-        @outtransport = Transport.find_by_name("#{@@originlocation.name}_to_#{@@destinationlocation.name}_"+checkedtransoutedit[0]["id"])
+        @outtransport = Transport.find_by_name("#{@@originlocation.name}_to_#{@@destinationlocation.name}_"+@resultTransport[0]["id"])
         outlikedtransport = LikedTransport.new
         outlikedtransport.user_id = current_user.id
         outlikedtransport.transport_id = @outtransport.id
@@ -384,27 +429,14 @@ def userpreference
       # end
 
        #checkedtransinedit.each_with_index do |val, index|
-        @intransport = Transport.find_by_name("#{@@destinationlocation.name}_to_#{@@originlocation.name}_"+checkedtransinedit[0]["id"])
+        @intransport = Transport.find_by_name("#{@@destinationlocation.name}_to_#{@@originlocation.name}_"+@resultTransport[1]["id"])
         inlikedtransport = LikedTransport.new
         inlikedtransport.user_id = current_user.id
         inlikedtransport.transport_id = @intransport.id
         if !LikedTransport.find_by(user_id: current_user.id, transport_id: @intransport.id)
             inlikedtransport.save
         end
-        @outtransport.price = checkedtransoutedit[0]["price"]
-        @intransport.price = checkedtransinedit[0]["price"]
-        
-        outwardtrip = TriptransportController.new(hoteltrip,@outtransport)
-        
-        inwardtrip = TriptransportController.new(outwardtrip,@intransport)
 
-        #trip=SearchbypriceController.itineraryprepare(@outtransport)
-        #trip= SearchbypriceController.itineraryprepare(@intransport)
-        
-
-        #Itineraryplannerbyprice.tripadder(@outtransport)
-        #Itineraryplannerbyprice.tripadder(@intransport)
-       #end
 
        #checkedresedit.each_with_index do |val, index|
         @restaurant = Restaurant.find_by(name: checkedresedit[0]["name"], location_id: @@destinationlocation.id)
@@ -415,34 +447,14 @@ def userpreference
             likedrestaurant.save
         end
         
-        finaltrip = TriprestaurantController.new(inwardtrip,@restaurant)
-        #Itineraryplannerbyprice.tripadder(@restaurant)
-        #trip =SearchbypriceController.itineraryprepare(@restaurant)
-       #end
 
-tripelements = finaltrip.elements
 
 @fromdate = finaltrip.fromdate
 @todate = finaltrip.todate
 @noofpersons = finaltrip.noofpersons
 @price = finaltrip.price.round(2)
-puts "-----------------------------trip object. elements----------------------------------------------"
-puts TripController.instance.inspect
-puts "------------------------------------------------------------------------------------------"
-@resultTransport =[]
-@resultRestaurant=[]
-tripelements.each_with_index do |val, index|
-        if(val.class.name.eql? "Hotel")
-            @resultHotel = val
 
-        elsif(val.class.name.eql? "Transport")
-            @resultTransport << val
 
-        elsif(val.class.name.eql? "Restaurant")
-            @resultRestaurant << val
-        end    
-
-   end 
 end
  
   def self.sortinghotels(likedhotels,scrappedhotels)
@@ -565,11 +577,11 @@ def updaterestauranttable
         restaurant.name = val["name"]
         restaurant.foodtype = val["type"]
         restaurant.price = val["economy"]
-        restaurant.location_id = @destinationlocation.id
+        restaurant.location_id = @@destinationlocation.id
          
         flag =false
         @restaurantall.each_with_index do |val, index|
-            if((val.name.eql? restaurant.name) && (val.location_id.eql? @destinationlocation.id))
+            if((val.name.eql? restaurant.name) && (val.location_id.eql? @@destinationlocation.id))
                 flag = true
                 break
             end

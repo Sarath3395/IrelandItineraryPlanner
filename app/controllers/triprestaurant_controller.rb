@@ -10,7 +10,7 @@ class TriprestaurantController < TripdecoratorController
 	def calculateprice(restaurant)
 		range = {"cheap"=>10, "average"=>20, "expensive"=>30}
 		
-		price= range[restaurant.price]
+		price= range[restaurant["economy"]]
 
 		f_date = @trip.fromdate
 		t_date = @trip.todate

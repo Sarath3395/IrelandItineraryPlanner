@@ -15,8 +15,8 @@
 <h4>Hotel details</h4>
         <div class="card border border-success">
           <div class="card-body">
-            <h5 class="card-title"><%= @resultHotel.name %></h5>
-            <p class="card-text"><%= @resultHotel.address %></p>
+            <h5 class="card-title"><%= @resultHotel["name"] %></h5>
+            <p class="card-text"><%= @resultHotel["address"] %></p>
           </div>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">From :<%= @fromdate %></li>
@@ -26,7 +26,7 @@
           </ul>
           <div class="card-body">
             <label>Price : €
-        	 <%= @resultHotel.price %>
+        	 <%= @resultHotel["price"] %>
           </label>
           </div>
         </div>
@@ -43,17 +43,17 @@
  <% if index != 0 %><br><% end -%>
         <div class="card border border-success">
           <div class="card-body">
-            <h5 class="card-title"><%= temp.origin%> to <%= temp.destination %></h5>
-            <p class="card-text">Expressway</p>
+            <h5 class="card-title"><%= temp["origin"]%> to <%= temp["destination"] %></h5>
+            <p class="card-text">Expressway <%= temp["route"]%></p>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Depart :<%= temp.departure %></li>
-            <li class="list-group-item">Arrival :<%= temp.arrival %></li>
-            <li class="list-group-item">Category :<%= temp.transporttype %></li>
+            <li class="list-group-item">Depart :<%= temp["depart"] %></li>
+            <li class="list-group-item">Arrival :<%= temp["arrival"] %></li>
+            <li class="list-group-item">Category :<%= temp["when"] %></li>
           </ul>
           <div class="card-body">
             <label>Price : €
-        	 <%= temp.price %>
+        	 <%= temp["price"] %>
           </label>
 
           </div>
@@ -78,15 +78,15 @@
           <% if index != 0 %><br><% end -%>
         <div class="card border border-success">
           <div class="card-body">
-            <h5 class="card-title"><%= temp.name %></h5>
-            <p class="card-text"><%= temp.foodtype%> </p>
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["type"]%> </p>
           </div>
           <ul class="list-group list-group-flush">
            
           </ul>
           <div class="card-body">
             <label>
-        	 <%= temp.price %>
+        	 <%= temp["economy"] %>
           </label>
         
 
