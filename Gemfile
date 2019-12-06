@@ -19,10 +19,11 @@ gem 'recommendationforuser'
 gem 'recommendation_strategy'
 
 gem 'prawn'
-gem 'figaro'
+
 gem 'chartkick'
 gem 'groupdate'
 gem 'rails-observers'
+gem 'figaro'
 group :development, :test do
 gem 'sqlite3'
 end
