@@ -38,6 +38,7 @@ gem 'watir'
 gem 'bookingscrapper'
 gem 'transportscrapper'
 gem 'restaurantscrapper'
+gem 'tripdecorator'
 
 
 gem "font-awesome-rails"

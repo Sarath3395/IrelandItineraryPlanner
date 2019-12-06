@@ -2,8 +2,11 @@ require 'bookingscrapper'
 require 'transportscrapper'
 require 'restaurantscrapper'
 require 'time'
+require 'tripdecorator'
 
 class SearchbypriceController < ApplicationController
+
+
 
 	@@scrappedHotels = []
     @@dublinhotels =[]
@@ -42,7 +45,7 @@ class SearchbypriceController < ApplicationController
     #@@trip = TripController.new(fromdate,todate,noofpersons)
     #Itineraryplannerbyprice.tripcreater(fromdate,todate,noofpersons)
     #SearchbypriceController.itineraryprepare([fromdate,todate,noofpersons])
-    trip = TripController.instance
+    trip = Trip.instance
     trip.fromdate=fromdate
     trip.todate=todate
     trip.noofpersons=noofpersons
@@ -205,8 +208,8 @@ indexofarray= indexofarray.to_i
     end
 
     @hotel.store("hashfor", "hotel")
-    basetrip = TripController.instance
-    @@hoteltrip = TriphotelController.new(basetrip,@hotel)
+    basetrip = Trip.instance
+    @@hoteltrip = Triphotel.new(basetrip,@hotel)
 
     
     fromdatestr = @hotel["fromdate"]
@@ -333,7 +336,7 @@ checkedtransoutedit[0].store("hashfor", "outbound")
 checkedtransoutedit[0].store("origin",@@originlocation.name )
 checkedtransoutedit[0].store("destination", @@destinationlocation.name)
 
-        outwardtrip = TriptransportController.new(@@hoteltrip,checkedtransoutedit[0])
+        outwardtrip = Triptransport.new(@@hoteltrip,checkedtransoutedit[0])
         puts "-------------------------------------------outwardinspect-------------------"
 puts "---------------------------------------------------------------------------------"
 puts outwardtrip.inspect
@@ -341,7 +344,7 @@ puts outwardtrip.inspect
 checkedtransinedit[0].store("hashfor", "inbound")
 checkedtransinedit[0].store("destination",@@originlocation.name )
 checkedtransinedit[0].store("origin", @@destinationlocation.name)
-        @@transporttrip = TriptransportController.new(outwardtrip,checkedtransinedit[0])
+        @@transporttrip =Triptransport.new(outwardtrip,checkedtransinedit[0])
         puts "-------------------------------------------inwardinspect-------------------"
 puts "---------------------------------------------------------------------------------"
 puts @@transporttrip.inspect
@@ -393,7 +396,7 @@ def userpreference
     end
  
     checkedresedit[0].store("hashfor", "restaurant")
-    finaltrip = TriprestaurantController.new(@@transporttrip,checkedresedit[0])
+    finaltrip = Triprestaurant.new(@@transporttrip,checkedresedit[0])
     tripelements = finaltrip.elements
 
 @resultTransport =[]
@@ -412,7 +415,7 @@ def userpreference
     end 
 
 puts "-----------------------------trip object. elements----------------------------------------------"
-puts TripController.instance.inspect
+puts Trip.instance.inspect
 puts "------------------------------------------------------------------------------------------"
 
         @hotel = Hotel.find_by_coordinates(@resultHotel["location"])
