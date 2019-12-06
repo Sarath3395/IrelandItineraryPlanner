@@ -19,3 +19,5 @@
 2019-12-04 14:37:00 +0000 Email has sent regarding: jklsdfasdf to this email id: sarath.ravichandran@gmail.com
 2019-12-04 14:40:00 +0000 An error is reported by user_id: User Not LoggedIn, user_name: User Not LoggedIn with the error message: guess me and the error is assigned to user_id: 2, user_name: SarathRavichandran 
 2019-12-04 14:40:00 +0000 Email has sent regarding: guess me to this email id: sarath.ravichandran@gmail.com
+2019-12-05 10:56:35 +0000 An error is reported by user_id: User Not LoggedIn, user_name: User Not LoggedIn with the error message: test sinleton and the error is assigned to user_id: 2, user_name: SarathRavichandran 
+2019-12-05 10:56:35 +0000 Email has sent regarding: test sinleton to this email id: sarath.ravichandran@gmail.com

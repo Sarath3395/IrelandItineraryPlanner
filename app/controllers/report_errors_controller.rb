@@ -1,4 +1,4 @@
-require 'my_logger'
+require 'reported_errors_logger'
 require 'simple_writer'
 require 'numbering_writer'
 require 'report_error_result_generator'
@@ -116,8 +116,8 @@ class ReportErrorsController < ApplicationController
     end
     respond_to do |format|
       if @report_error.save
-        # retrieve the instance/object of the MyLogger class
-        logger = MyLogger.instance
+        # retrieve the instance/object of the ReportedErrorsLogger class
+        logger = ReportedErrorsLogger.instance
         u = User.find_by_id(@report_error.user_id)
         if (@reported_by == "User Not LoggedIn")
         logger.logInformation("#{Time.now} An error is reported by user_id: #{@reported_by}, user_name: #{@reported_by} with the error message: #{@report_error.errormessage} and the error is assigned to user_id: #{@report_error.user_id}, user_name: #{u.name} ")

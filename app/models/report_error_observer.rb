@@ -5,7 +5,7 @@ class ReportErrorObserver < ActiveRecord::Observer
     tmp.save
 
     ReporterrorMailer.with(report_error: record).new_report_error_email.deliver_later
-# use the MyLogger instance method to retrieve the single instance/object of the class
+# use the ReportedErrorsLogger instance method to retrieve the single instance/object of the class
 
   end
 end
