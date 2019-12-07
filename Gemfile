@@ -24,17 +24,24 @@ gem 'chartkick'
 gem 'groupdate'
 gem 'rails-observers'
 gem 'figaro'
+
+
 group :development, :test do
 gem 'sqlite3'
 end
+
+
+
+gem 'recommendationforuser'
 gem 'rails-observers'
 
 gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'
 gem 'bookingscrapper'
-gem 'transportscrapper', '1.0.6'
+gem 'transportscrapper'
 gem 'restaurantscrapper'
+gem 'tripdecorator'
 
 
 gem "font-awesome-rails"
