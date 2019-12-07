@@ -1,10 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: The River Lee Hotel a member of The Doyle Collection
   roomtype: MyString
   fromdate: 2019-10-28 17:11:34
-  coordinates: MyString
+  coordinates: -6.22489482164383,53.3257877768286
   address: MyString
   todate: 2019-10-28 17:11:34
   price: MyString
@@ -14,10 +14,23 @@ one:
   location: one
 
 two:
-  name: MyString
+  name: The Grafton Hotel
   roomtype: MyString
   fromdate: 2019-10-28 17:11:34
-  coordinates: MyString
+  coordinates: -8.47006738185883,51.8971251859727
+  address: MyString
+  todate: 2019-10-28 17:11:34
+  price: MyString
+  noofrooms: MyString
+  noofperson: MyString
+  bedtype: MyString
+  location: two
+
+three:
+  name: Imperial Hotel Cork City
+  roomtype: MyString
+  fromdate: 2019-10-28 17:11:34
+  coordinates: -6.2640663494293,53.3574782856335
   address: MyString
   todate: 2019-10-28 17:11:34
   price: MyString

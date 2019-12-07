@@ -21,8 +21,8 @@
           </ul>
           <div class="card-body">
 
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
 
 
@@ -53,8 +53,8 @@
           </ul>
           <div class="card-body">
             <!--<a href="#" class="btn btn-primary">Search</a> -->
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
           </div>
         </div>
@@ -81,8 +81,8 @@
             <li class="list-group-item"><%= temp["price"] %></li>
           </ul>
           <div class="card-body">
-           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+           <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
           </div>
         </div>
@@ -110,8 +110,8 @@
             <li class="list-group-item"><%= temp["price"] %></li>
           </ul>
           <div class="card-body">
-               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+               <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
           </div>
         </div>
@@ -138,8 +138,8 @@
             <li class="list-group-item"><%= temp["price"] %></li>
           </ul>
           <div class="card-body">
-                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+                  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
           </div>
         </div>
@@ -167,8 +167,8 @@
           </ul>
           <div class="card-body">
    
-          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModalCenter" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
-            Transport and Restaurant
+          <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#searchbypriceModal" data-index= <%=index%> data-destination= <%=temp["location_id"]%>>
+            Choose Transport
           </button>
           </div>
 
@@ -184,7 +184,7 @@
 </table>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="searchbypriceModal" tabindex="-1" role="dialog" aria-labelledby="searchbypricetitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -193,7 +193,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-        <%= form_for :search, url: searchtransportrestaurant_path  do |form| %>
+        <%= form_for :search, url: searchtransport_path  do |form| %>
       <div class="modal-body">
         <div class="form-group">
         <label class="font-weight-bold" for="place">Places</label>

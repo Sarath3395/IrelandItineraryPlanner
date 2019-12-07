@@ -29,8 +29,13 @@ root 'welcome#homepage'
 
   get 'new_report_error_path' => 'report_errors#new'
  get '/searchbyprice' => 'searchbyprice#searchbyprice'
- post '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
- get '/searchtransportrestaurant' => 'searchbyprice#searchtransportrestaurant'
+ post '/searchtransport' => 'searchbyprice#searchtransport'
+ get '/searchtransport' => 'searchbyprice#searchtransport'
+
+  post '/searchrestaurant' => 'searchbyprice#searchrestaurant'
+ get '/searchrestaurant' => 'searchbyprice#searchrestaurant'
+
+
 
   post '/userpreference' => 'searchbyprice#userpreference'
  get '/userpreference' => 'searchbyprice#userpreference'

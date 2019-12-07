@@ -1,0 +1,45 @@
+<table>
+   <%= form_for :prefer, url: userpreference_path  do |form| %>
+
+  <div class="row">
+    <div class="col-sm-6">
+  <h2>Search Results</h2> 
+  </div>
+  <div class="col-sm-4"></div>
+  <div class="col-sm-2"> 
+    <%= form.submit "Get Itinerary" ,{class: "btn btn-primary",id: "submitbutton", data: {disable_with: "Loading..."}} %>
+</div>
+</div>
+  
+ <% if @scrappedrestaurant != [] %>
+  <div class="border border-primary rounded p-3">
+  <h4>Restaurants</h4>
+  <div class="row">
+    <% @scrappedrestaurant.each_with_index do |temp,index| -%>
+      <div class="col-sm-4 p-3">
+        <div class="card border border-success">
+          <div class="card-body">
+            <h5 class="card-title"><%= temp["name"] %></h5>
+            <p class="card-text"><%= temp["type"] %></p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Category :<%= temp["economy"] %></li>
+          </ul>
+          <div class="card-body">
+            <label>
+            <%= check_box_tag 'checkedres[]', temp%>
+            <span>Check it as your preference</span>
+          </label>
+
+          </div>
+        </div>
+      </div>
+    <% end -%>
+    <br>
+  </div>
+</div>
+<% end %>
+
+
+<% end  %>
+</table>
