@@ -1,6 +1,6 @@
 require 'chart_decorator'
 class AdminController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, :check_admin
   def adminhome
 
 
@@ -35,4 +35,16 @@ class AdminController < ApplicationController
 
 
   end
+  def check_admin
+    u = User.find_by_id(current_user.id)
+    @adminflg = u.admin
+
+      if (@adminflg == true)
+
+      else
+        redirect_to root_path, alert: 'Admin Access Denied.'
+      end
+    end
+
+
 end

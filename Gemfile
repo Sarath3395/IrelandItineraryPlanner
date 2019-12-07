@@ -3,14 +3,20 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.5'
 
-gem "recaptcha", require: "recaptcha/rails"
+
 gem 'geocoder'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.1'
 # Use sqlite3 as the database for Active Record
-gem 'omniauth-google-oauth2'
+
+#Security Gems
+gem 'rails_admin'
 gem 'brakeman'
+gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'omniauth-facebook'
+gem "recaptcha", require: "recaptcha/rails"
+gem 'figaro'
 
 gem 'favouriteshandler'
 gem 'chartdecorator'
@@ -23,13 +29,12 @@ gem 'prawn'
 gem 'chartkick'
 gem 'groupdate'
 gem 'rails-observers'
-gem 'figaro'
+
 group :development, :test do
 gem 'sqlite3'
 end
 gem 'rails-observers'
 
-gem 'rails_admin'
 gem 'nokogiri'
 gem 'watir'
 gem 'bookingscrapper'
@@ -52,7 +57,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 # Heroku uses Heroku Postgres DB based on PostgreSQL
