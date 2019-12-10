@@ -417,7 +417,7 @@ def userpreference
 puts "-----------------------------trip object. elements----------------------------------------------"
 puts Trip.instance.inspect
 puts "------------------------------------------------------------------------------------------"
-
+    if(current_user)
         @hotel = Hotel.find_by_coordinates(@resultHotel["location"])
         likedhotel = LikedHotel.new
         likedhotel.user_id = current_user.id
@@ -457,7 +457,7 @@ puts "--------------------------------------------------------------------------
             likedrestaurant.save
         end
         
-
+    end
 
 @fromdate = finaltrip.fromdate
 @todate = finaltrip.todate

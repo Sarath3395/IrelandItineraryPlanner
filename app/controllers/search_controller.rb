@@ -1,12 +1,13 @@
 require 'bookingscrapper'
 require 'transportscrapper'
 require 'restaurantscrapper'
+require './lib/ipinvestigator'
 
 class SearchController < ApplicationController
 
   def searchmethod
 
-    if (params[:commit] == 'Search' && (params[:search][:fromdate].length != 0 && params[:search][:todate].length != 0))
+    if (params[:commit] == 'Search' && (params[:search][:fromdate].length != 0 && params[:search][:todate].length != 0) && Ipinvestigator.checkip )
 
       search_form = Hash.new
       search_form.store("fromdate", params[:search][:fromdate])
