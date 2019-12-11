@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>ItineraryPlanner</title>
+<head>
+  <title>ItineraryPlanner</title>
 
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
 
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <%= favicon_link_tag asset_path('icon.png') %>
+  <%= favicon_link_tag asset_path('icon.png') %>
 
-    <style type="text/css">
-      .locationdiv {
-        display: none;
-      }
-      .pricediv {
-        display: none;
-      }
-    </style>
-  </head>
+  <style type="text/css">
+    .locationdiv {
+      display: none;
+    }
+    .pricediv {
+      display: none;
+    }
+  </style>
+</head>
 
-  <body>
-    <% if notice %>
+<body>
+<% if notice %>
   <p class="alert alert-success"><%= notice %></p>
 <% end %>
 <% if alert %>
@@ -48,69 +48,69 @@
 
 
   <% if user_signed_in? %>
-  <% if  current_user.admin == true %>
+    <% if  current_user.admin == true %>
 
       <a href="/adminpage">Admin  </a>
 
     <% end %>
-    <% end %>
+  <% end %>
   <form class="form-inline">
     <% if user_signed_in? %>
       <a  href="/like/" >Favorites &nbsp; </a>
-     &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
+      &nbsp;<strong><%= current_user.email %>&nbsp;&nbsp;</strong>
 
-    <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
-    Edit profile
-    </a>
-
-    <div style="padding-left: 10px;">
-      <a class="btn btn-outline-danger" data-method="delete" href="<%=destroy_user_session_path%>" role="button">
-      Logout
+      <a class="btn btn-outline-primary" href="<%=edit_user_registration_path%>" role="button">
+        Edit profile
       </a>
-    </div>
+
+      <div style="padding-left: 10px;">
+        <a class="btn btn-outline-danger" data-method="delete" href="<%=destroy_user_session_path%>" role="button">
+          Logout
+        </a>
+      </div>
 
 
     <% else %>
       <a  href="/auth/google_oauth2" >Google SignIn &nbsp; </a>
 
       <a class="btn btn-outline-primary" href="<%=new_user_session_path%>" role="button">
-    Login
-    </a>
-
-    <div style="padding-left: 10px;">
-      <a class="btn btn-outline-success" href="<%=new_user_registration_path%>" role="button">
-      Sign Up
+        Login
       </a>
-    </div>
+
+      <div style="padding-left: 10px;">
+        <a class="btn btn-outline-success" href="<%=new_user_registration_path%>" role="button">
+          Sign Up
+        </a>
+      </div>
 
     <% end %>
   </form>
 </nav>
 <div style="padding-left: 15px; padding-top: 15px; padding-bottom: 15px;">
-<%= form_for :search, url: search_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
+  <%= form_for :search, url: search_path , class: 'form-inline', style: 'display:inline !important;' do |form| %>
     <div class="row">
       <div class="col-sm-2">
         <label class="font-weight-bold" for="fromdate">Check-in date</label>
-    <%= form.date_field :fromdate ,{class: "form-control", id:"fromdate"}%>
-  </div>
-    <div class="col-sm-2">
-      <label class="font-weight-bold" for="todate">Check-out date</label>
-      <%= form.date_field :todate,{class: "form-control" , id:"todate"}%>
-  </div>
+        <%= form.date_field :fromdate ,{class: "form-control", id:"fromdate"}%>
+      </div>
+      <div class="col-sm-2">
+        <label class="font-weight-bold" for="todate">Check-out date</label>
+        <%= form.date_field :todate,{class: "form-control" , id:"todate"}%>
+      </div>
       <div class="col-sm-2">
         <label class="font-weight-bold" for="noofpersons">No.of Persons</label>
         <%= form.select :noofpersons,  [['1 adult','1'],['2 adults','2'],['3 adults','3'],['4 adults','4'],['5 adults','5'],['6 adults','6'],['7 adults','7'],['8 adults','8'],['9 adults','9'],['10 adults','10'],['11 adults','11'],['12 adults','12']], {},:class => "form-control",:id => "noofpersons" %>
-  </div>
+      </div>
 
       <div class="col-sm-1">
         <label class="font-weight-bold" for="noofrooms">No.of rooms</label>
         <%= form.select :noofrooms,  [['1 room','1'],['2 rooms','2'],['3 rooms','3'],['4 rooms','4'],['5 rooms','5'],['6 rooms','6'],['7 rooms','7'],['8 rooms','8'],['9 rooms','9'],['10 rooms','10'],['11 rooms','11'],['12 rooms','12']],{},:class => "form-control",:id => "noofrooms" %>
-  </div>
+      </div>
 
-        <div class="col-sm-2">
-          <label class="font-weight-bold" for="searchtype">Search type</label>
-  <%= form.select :searchtype,  [['Search by Price','searchbyprice'],['Search by Place','searchbyplace']], {},:class => "form-control", :id => "searchtype" %>
-  </div>
+      <div class="col-sm-2">
+        <label class="font-weight-bold" for="searchtype">Search type</label>
+        <%= form.select :searchtype,  [['please select one','pleaseseletone'],['Search by Price','searchbyprice'],['Search by Place','searchbyplace']], {},:class => "form-control", :id => "searchtype" %>
+      </div>
 
       <div class="col-sm-2 pricediv form-group">
         <label class="font-weight-bold" for="price">Price range</label>
@@ -133,13 +133,13 @@
       <div class="col-sm-1 form-group">
         <label class="font-weight-bold" for="submitbutton">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
         <%= form.submit "Search" ,{class: "btn btn-primary",id: "submitbutton", data: {disable_with: "Loading..."}} %>
-       </div>
+      </div>
     </div>
-<% end  %>
+  <% end  %>
 
 </div>
-    <div style="padding-left: 15px;">
-    <%= yield %>
-    </div>
-  </body>
+<div style="padding-left: 15px;">
+  <%= yield %>
+</div>
+</body>
 </html>

@@ -3,61 +3,74 @@
 $(document).ready(function() {
 
 
-var ATTRIBUTES = ['index', 'destination'];
+    var ATTRIBUTES = ['index', 'destination'];
 
-$('[data-toggle="modal"]').on('click', function (e) {
-  var $target = $(e.target);
-  var modalSelector = $target.data('target');
-  ATTRIBUTES.forEach(function (attributeName) {
-    var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
-    var dataValue = $target.data(attributeName);
-    var s = document.getElementById('modal-'+attributeName);
-    s.value = dataValue;
+    $('[data-toggle="modal"]').on('click', function (e) {
+        var $target = $(e.target);
+        var modalSelector = $target.data('target');
+        ATTRIBUTES.forEach(function (attributeName) {
+            var $modalAttribute = $(modalSelector + ' #modal-' + attributeName);
+            var dataValue = $target.data(attributeName);
+            var s = document.getElementById('modal-'+attributeName);
+            s.value = dataValue;
 
-    $modalAttribute.text(dataValue || '');
+            $modalAttribute.text(dataValue || '');
+        });
+        var s = document.getElementById('modal-destination').value;
+
+        var select=document.getElementById('modalplace');
+
+        for (i=0;i<select.length;  i++) {
+            select.options[i].disabled = false ;
+        }
+        for (i=0;i<select.length;  i++) {
+            if (select.options[i].value==s) {
+                select.options[i].disabled = true ;
+                if(i<select.length){
+                    select.options[i+1].selected = 'selected';
+                }
+                else{
+                    select.options[0].selected = 'selected';
+                }
+            }
+        }
     });
-  var s = document.getElementById('modal-destination').value;
 
-var select=document.getElementById('modalplace');
 
-for (i=0;i<select.length;  i++) {
-     select.options[i].disabled = false ;
-}
-for (i=0;i<select.length;  i++) {
-   if (select.options[i].value==s) {
-     select.options[i].disabled = true ;
-     if(i<select.length){
-     select.options[i+1].selected = 'selected';
-    }
-    else{
-       select.options[0].selected = 'selected'; 
-    }
-   }
-}
+
+
+
+
+
+
+    $( "#submitbutton" ).click(function( event ) {
+        var searchtype = $("#searchtype").val();
+        if(searchtype == "pleaseseletone"){
+            alert("Please Select a SearchType");
+            event.preventDefault();
+        }
     });
 
 
 
 
-   $(".pricediv").slideDown(100);
+    $("#searchtype").on('change',function(){
+        var searchtype = $("#searchtype").val();
 
-   $("#searchtype").on('change',function(){
-      var searchtype = $("#searchtype").val();
+        if(searchtype =="searchbyprice"){
+            $(".locationdiv").slideUp(100);
+            $(".pricediv").slideDown(100);
+        }
+        else if(searchtype =="searchbyplace"){
 
-      if(searchtype =="searchbyprice"){
-         $(".locationdiv").slideUp(100);
-         $(".pricediv").slideDown(100);
-      }
-      else if(searchtype =="searchbyplace"){
-
-         $(".pricediv").slideUp(100);
-         $(".locationdiv").slideDown(100);
-      }
-      else{
-         $(".locationdiv").slideUp(100);
-         $(".pricediv").slideUp(100);
-      }
-   });
+            $(".pricediv").slideUp(100);
+            $(".locationdiv").slideDown(100);
+        }
+        else{
+            $(".locationdiv").slideUp(100);
+            $(".pricediv").slideUp(100);
+        }
+    });
 
     $("#noofpersons").on('change',function(){
 
