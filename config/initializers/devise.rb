@@ -267,8 +267,8 @@ Devise.setup do |config|
 
 
 
-  client_id = ENV["GOOGLE_APP_ID"]
-  client_secret = ENV["GOOGLE_APP_SECRET"]
+  client_id = '90438522264-kaj7ivddudfrm4tgrt26d0btd5grj8kq.apps.googleusercontent.com'
+  client_secret = 'K-cOQGc9kb22QF66hXw_FiCa'
   config.omniauth :google_oauth2, client_id, client_secret
   config.omniauth_path_prefix = '/auth'
 
