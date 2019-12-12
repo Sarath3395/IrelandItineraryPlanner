@@ -110,7 +110,7 @@ class ReportErrorsController < ApplicationController
     aduser = adminusers.order("RANDOM()")
     @report_error.user_id = aduser.first.id
     if( user_signed_in? )
-      @reported_by = curren_user.name
+      @reported_by = current_user.name
     else
       @reported_by = "User Not LoggedIn"
     end
