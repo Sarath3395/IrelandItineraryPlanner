@@ -23,7 +23,7 @@ module ItineraryPlanner
         domain: "gmail.com",
         port: 587,
         user_name: "itineraryplannerhelp@gmail.com",
-        password: "",
+        password: "itsawesome",
         authentication: 'plain',
         enable_starttls_auto: true
     }
