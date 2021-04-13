@@ -1,6 +1,8 @@
 require 'favorites'
 
+
 #master branch indi
+
 
 include Favorites
 class LikeController < ApplicationController
