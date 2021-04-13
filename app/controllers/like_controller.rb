@@ -1,5 +1,6 @@
 require 'favorites'
 
+#
 include Favorites
 class LikeController < ApplicationController
   before_action :authenticate_user!
